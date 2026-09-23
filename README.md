@@ -3,11 +3,19 @@
 > **Weightless physics for modern web interfaces.**  
 > `< 2.5KB` gzipped. Native WAAPI compositor acceleration. Zero dependencies. Designed for modern frontends and AI code generators.
 
+[![Demo](https://img.shields.io/badge/demo-interactive%20playground-cyan?style=flat-square)](https://bytewhisker.github.io/zerog-motion/)
 [![Bundle Size](https://img.shields.io/badge/bundle%20size-%3C%202.5%20KB%20gzipped-brightgreen?style=flat-square)](https://github.com/bytewhisker/zerog-motion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success?style=flat-square)](https://github.com/bytewhisker/zerog-motion)
 [![GitHub](https://img.shields.io/badge/GitHub-bytewhisker%2Fzerog--motion-black?style=flat-square&logo=github)](https://github.com/bytewhisker/zerog-motion)
+
+---
+
+## 🎮 [Live Interactive Playground](https://bytewhisker.github.io/zerog-motion/)
+
+Experience real-time spring physics, dial custom constants, and test the streaming `autoMorph` layout engine live in your browser:  
+👉 **[https://bytewhisker.github.io/zerog-motion/](https://bytewhisker.github.io/zerog-motion/)**
 
 ---
 
