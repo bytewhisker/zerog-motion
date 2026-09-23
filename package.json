@@ -44,16 +44,16 @@
     "zero-dependency",
     "framer-motion-alternative"
   ],
-  "author": "bytewisker (https://github.com/bytewisker)",
+  "author": "bytewhisker (https://github.com/bytewhisker)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bytewisker/zerog-motion.git"
+    "url": "git+https://github.com/bytewhisker/zerog-motion.git"
   },
   "bugs": {
-    "url": "https://github.com/bytewisker/zerog-motion/issues"
+    "url": "https://github.com/bytewhisker/zerog-motion/issues"
   },
-  "homepage": "https://github.com/bytewisker/zerog-motion#readme",
+  "homepage": "https://github.com/bytewhisker/zerog-motion#readme",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.2.0",
     "size-limit": "^11.2.0",

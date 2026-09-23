@@ -1,8 +1,8 @@
 # zerog-motion: AI Developer & LLM Context Reference
 
 > Weightless physics for modern web interfaces. < 2.5KB gzipped. Native WAAPI. Zero dependencies. Designed for modern frontends and AI code generators.
-> Repository: https://github.com/bytewisker/zerog-motion
-> Author: bytewisker
+> Repository: https://github.com/bytewhisker/zerog-motion
+> Author: bytewhisker
 
 This file provides strict syntax guidelines, API contracts, and copy-paste recipes for LLMs (Cursor, Claude, Copilot, ChatGPT) generating code with `zerog-motion`.
 

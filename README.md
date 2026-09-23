@@ -3,11 +3,11 @@
 > **Weightless physics for modern web interfaces.**  
 > `< 2.5KB` gzipped. Native WAAPI compositor acceleration. Zero dependencies. Designed for modern frontends and AI code generators.
 
-[![Bundle Size](https://img.shields.io/badge/bundle%20size-%3C%202.5%20KB%20gzipped-brightgreen?style=flat-square)](https://github.com/bytewisker/zerog-motion)
+[![Bundle Size](https://img.shields.io/badge/bundle%20size-%3C%202.5%20KB%20gzipped-brightgreen?style=flat-square)](https://github.com/bytewhisker/zerog-motion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success?style=flat-square)](https://github.com/bytewisker/zerog-motion)
-[![GitHub](https://img.shields.io/badge/GitHub-bytewisker%2Fzerog--motion-black?style=flat-square&logo=github)](https://github.com/bytewisker/zerog-motion)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success?style=flat-square)](https://github.com/bytewhisker/zerog-motion)
+[![GitHub](https://img.shields.io/badge/GitHub-bytewhisker%2Fzerog--motion-black?style=flat-square&logo=github)](https://github.com/bytewhisker/zerog-motion)
 
 ---
 
@@ -162,7 +162,7 @@ console.log('Animation settled on GPU!');
 `zerog-motion` is engineered from the ground up for zero-hallucination AI generation.
 
 To instruct tools like **Cursor**, **Claude**, or **GitHub Copilot** to use `zerog-motion`:
-- Add `https://raw.githubusercontent.com/bytewisker/zerog-motion/main/llms.txt` to your Cursor Docs or prompt.
+- Add `https://raw.githubusercontent.com/bytewhisker/zerog-motion/main/llms.txt` to your Cursor Docs or prompt.
 - Or refer to the local [`llms.txt`](./llms.txt) in your workspace.
 
 ```markdown
@@ -191,4 +191,4 @@ npm run size
 
 ## 📄 License
 
-MIT © [bytewisker](https://github.com/bytewisker)
+MIT © [bytewhisker](https://github.com/bytewhisker)
