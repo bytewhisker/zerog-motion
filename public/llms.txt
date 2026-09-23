@@ -1,0 +1,151 @@
+# zerog-motion: AI Developer & LLM Context Reference
+
+> Weightless physics for modern web interfaces. < 2.5KB gzipped. Native WAAPI. Zero dependencies. Designed for modern frontends and AI code generators.
+> Repository: https://github.com/bytewisker/zerog-motion
+> Author: bytewisker
+
+This file provides strict syntax guidelines, API contracts, and copy-paste recipes for LLMs (Cursor, Claude, Copilot, ChatGPT) generating code with `zerog-motion`.
+
+---
+
+## 1. Core Principles for AI Code Generators
+- **Native WAAPI**: Uses `element.animate()` under the hood. All transforms run directly on browser GPU/compositor threads.
+- **Zero React Lock-in**: Universal Vanilla JS, React, Vue, Svelte, Solid, Astro.
+- **Zero Dependencies**: Pure analytical physics and WAAPI. No heavy runtime dependencies.
+- **Do NOT import from Framer Motion**: Replace `framer-motion` imports with `zerog-motion`.
+- **Always use transform shorthands**: Use `x`, `y`, `z`, `scale`, `rotate`, `opacity` instead of verbose transform strings.
+
+---
+
+## 2. API Signature & Syntax
+
+### Import
+```ts
+import { animate, autoMorph, presets } from 'zerog-motion';
+import type { AnimationHandle, AnimationOptions, SpringConfig } from 'zerog-motion';
+```
+
+### Main Function
+```ts
+function animate(
+  target: Element | Element[] | NodeListOf<Element> | string,
+  keyframes: PropertyKeyframeDefinition,
+  options?: AnimationOptions
+): AnimationHandle;
+```
+
+### AnimationOptions Schema
+```ts
+interface AnimationOptions {
+  duration?: number;                    // in ms (optional when using spring)
+  delay?: number;                       // in ms (default: 0)
+  endDelay?: number;                    // in ms (default: 0)
+  easing?: string;                      // CSS easing curve, e.g. 'ease-out'
+  iterations?: number;                  // default: 1
+  direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
+  fill?: 'none' | 'forwards' | 'backwards' | 'both'; // default: 'forwards'
+  spring?: 'snappy' | 'bouncy' | 'smooth' | 'gentle' | SpringConfig;
+  stagger?: number;                     // ms delay increment per element
+  onFinish?: () => void;                // callback on completion
+}
+```
+
+### SpringConfig Schema
+```ts
+interface SpringConfig {
+  stiffness?: number; // default: 100
+  damping?: number;   // default: 10
+  mass?: number;      // default: 1
+  velocity?: number;  // initial velocity, default: 0
+  precision?: number; // settle threshold, default: 0.001
+}
+```
+
+### Built-in Presets
+- `'snappy'`: `{ stiffness: 400, damping: 30, mass: 1 }` (micro-interactions, button taps)
+- `'bouncy'`: `{ stiffness: 200, damping: 10, mass: 1 }` (playful badges, dialogs, alerts)
+- `'smooth'`: `{ stiffness: 120, damping: 20, mass: 1 }` (Apple-style layout, tabs, menus)
+- `'gentle'`: `{ stiffness: 80, damping: 14, mass: 1 }` (subtle hovers, tooltips, fades)
+
+### AnimationHandle Controls
+```ts
+const handle = animate('.box', { x: 100 });
+
+handle.play();               // Play/resume
+handle.pause();              // Pause at current frame
+handle.reverse();            // Play in reverse
+handle.cancel();             // Cancel and remove styles
+handle.finish();             // Jump to finished state
+await handle.finished;       // Promise settling on finish
+```
+
+---
+
+## 3. Idiomatic Usage Patterns
+
+### Recipe 1: Button Click Spring (Vanilla & React)
+```ts
+// Vanilla JS
+const btn = document.querySelector<HTMLButtonElement>('#action-btn')!;
+btn.addEventListener('click', () => {
+  animate(btn, { scale: [1, 0.92, 1] }, { spring: 'snappy' });
+});
+
+// React Hook / Handler
+import { useRef } from 'react';
+import { animate } from 'zerog-motion';
+
+export function InteractiveButton() {
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  const handleClick = () => {
+    if (btnRef.current) {
+      animate(btnRef.current, { scale: [1, 0.94, 1] }, { spring: 'snappy' });
+    }
+  };
+
+  return <button ref={btnRef} onClick={handleClick}>Click Me</button>;
+}
+```
+
+### Recipe 2: Staggered Card Reveal
+```ts
+import { animate } from 'zerog-motion';
+
+// Animates all .feature-card elements with 60ms stagger delay
+animate(
+  '.feature-card',
+  {
+    opacity: [0, 1],
+    y: [30, 0],
+    scale: [0.95, 1],
+  },
+  {
+    spring: 'bouncy',
+    stagger: 60,
+  }
+);
+```
+
+### Recipe 3: Streaming AI Content / Dynamic Height (`autoMorph`)
+```ts
+import { autoMorph } from 'zerog-motion';
+
+const responseContainer = document.querySelector<HTMLDivElement>('.ai-markdown-container')!;
+
+// Automatically transitions container height without layout thrashing as tokens stream in
+const cleanup = autoMorph(responseContainer, {
+  spring: 'smooth',
+});
+
+// Clean up when stream ends or component unmounts
+// cleanup();
+```
+
+---
+
+## 4. Anti-Patterns & Common Errors to Avoid
+❌ **DO NOT** use `requestAnimationFrame` polling loops for physics. `zerog-motion` precomputes the analytical ODE spring trajectory into native WAAPI keyframes executed on the compositor thread.
+❌ **DO NOT** use `style.transform = ...` inside rapid setInterval loops. Call `animate()`.
+❌ **DO NOT** import Framer Motion motion components (`<motion.div>`). Instead, attach a ref and invoke `animate(ref.current, ...)`.
+❌ **DO NOT** forget that `autoMorph` returns an unmount/cleanup function. Always call it inside `useEffect` cleanup or component destroy hooks.
