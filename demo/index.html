@@ -3,32 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>zerog-motion | Weightless Physics (< 2.5KB) Native WAAPI Playground</title>
-  <meta name="description" content="Weightless physics for modern web interfaces. < 2.5KB gzipped. Native WAAPI compositor acceleration. Zero dependencies." />
+  <title>zerog-motion | Weightless Physics · Text · Timeline · Scroll</title>
+  <meta name="description" content="The AI-native animation library. &lt; 4KB. Compositor-thread physics, cinematic text animations, timeline orchestration, scroll reveal. Beat GSAP & Anime.js." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <div class="noise-overlay"></div>
   <div class="container">
-    <!-- Hero Header -->
-    <header>
+
+    <!-- ═══ HERO ═══ -->
+    <header id="hero">
       <div class="hero-pill">
         <span class="dot"></span>
-        <span>Native WAAPI Compositor Acceleration</span>
+        <span>Now with Text Motion Suite + Timeline</span>
       </div>
 
-      <h1>Weightless Physics. <span>&lt; 2.5KB</span>.</h1>
-      <p class="subtitle">
-        Zero dependencies. 10x lighter than Framer Motion. Zero layout thrashing on streaming AI content.
+      <h1 id="hero-title">Weightless Physics.<br><span>The AI‑Native Animation Engine.</span></h1>
+      <p class="subtitle" id="hero-sub">
+        GPU-compositor animations that never drop frames—even when your LLM is streaming tokens. 
+        94% lighter than GSAP. Zero dependencies.
       </p>
 
-      <div class="badge-row">
-        <div class="badge">Bundle: <strong>2.46 KB</strong></div>
-        <div class="badge">Thread: <strong>GPU / Compositor</strong></div>
-        <div class="badge">Dependencies: <strong>0</strong></div>
-        <div class="badge">Framework: <strong>Universal</strong></div>
+      <div class="badge-row" id="hero-badges">
+        <div class="badge">Bundle: <strong>&lt; 4KB</strong></div>
+        <div class="badge">Thread: <strong>Compositor</strong></div>
+        <div class="badge">Text: <strong>8 Presets</strong></div>
+        <div class="badge">Timeline: <strong>✓</strong></div>
+        <div class="badge">Scroll: <strong>✓</strong></div>
+        <div class="badge">Magnetic: <strong>✓</strong></div>
       </div>
 
       <div class="cta-row">
@@ -36,50 +41,115 @@
           <span>npm i zerog-motion</span>
           <span class="copy-hint" id="copy-hint">Copy</span>
         </div>
-        <a href="https://github.com/bytewhisker/zerog-motion" target="_blank" rel="noopener noreferrer" class="btn-github">
+        <a href="https://github.com/bytewhisker/zerog-motion" target="_blank" rel="noopener noreferrer" class="btn-github" id="btn-github-hero">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-          GitHub Repo
+          GitHub
         </a>
       </div>
     </header>
 
-    <!-- Section 1: Tactile Spring Playground -->
-    <section class="section">
+    <!-- ═══ SECTION 1: TEXT MOTION STUDIO ═══ -->
+    <section class="section" id="text-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">✦ Text Motion Studio</h2>
+          <p class="section-desc">8 cinematic presets. Compositor-native WAAPI. Each character is individually GPU-accelerated.</p>
+        </div>
+      </div>
+
+      <!-- Text Preset Showcase -->
+      <div class="glass-panel text-studio">
+        <div class="text-preset-tabs" id="text-tabs">
+          <button class="tab-btn active" data-preset="mask-up">Mask Up</button>
+          <button class="tab-btn" data-preset="blur-in">Blur In</button>
+          <button class="tab-btn" data-preset="flip-3d">Flip 3D</button>
+          <button class="tab-btn" data-preset="wave">Wave</button>
+          <button class="tab-btn" data-preset="glitch">Glitch</button>
+          <button class="tab-btn" data-preset="typewriter">Typewriter</button>
+          <button class="tab-btn" data-preset="rise">Rise</button>
+          <button class="tab-btn" data-preset="fade-up">Fade Up</button>
+        </div>
+
+        <div class="text-stage" id="text-stage">
+          <div class="text-display" id="text-display">
+            <p id="demo-text" class="animate-text">Motion so smooth it feels weightless</p>
+          </div>
+          <div class="text-controls">
+            <button class="btn-action" id="btn-replay-text">↺ Replay</button>
+            <div class="text-input-wrap">
+              <input type="text" id="custom-text-input" placeholder="Type your own text..." value="Motion so smooth it feels weightless" maxlength="60" />
+            </div>
+          </div>
+        </div>
+
+        <div class="preset-info" id="preset-info">
+          <span class="preset-name-badge" id="preset-name-badge">mask-up</span>
+          <code id="preset-code-snippet">animateText(el, { preset: 'mask-up', spring: 'snappy', stagger: 40 })</code>
+        </div>
+      </div>
+
+      <!-- ScrambleText Demo -->
+      <div class="glass-panel scramble-panel" id="scramble-panel">
+        <div class="scramble-header">
+          <div>
+            <h3 class="panel-title">⌨ ScrambleText — AI Terminal Decoder</h3>
+            <p class="panel-desc">Characters scramble through random chars before revealing. The hacker aesthetic.</p>
+          </div>
+          <div class="scramble-charset-btns" id="scramble-charsets">
+            <button class="charset-btn active" data-charset="default">ASCII</button>
+            <button class="charset-btn" data-charset="hex">HEX</button>
+            <button class="charset-btn" data-charset="binary">BINARY</button>
+            <button class="charset-btn" data-charset="katakana">カタカナ</button>
+          </div>
+        </div>
+
+        <div class="scramble-stage">
+          <p id="scramble-text" class="scramble-output">Initializing quantum entanglement protocol...</p>
+        </div>
+
+        <div class="scramble-actions">
+          <button class="btn-action" id="btn-scramble">▶ Decode</button>
+          <button class="btn-action" id="btn-scramble-skip">⏭ Skip</button>
+          <input type="text" id="scramble-input" placeholder="Enter text to scramble..." value="Initializing quantum entanglement protocol..." maxlength="80" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION 2: SPRING PHYSICS ═══ -->
+    <section class="section" id="spring-section">
       <div class="section-header">
         <div>
           <h2 class="section-title">⚡ Tactile Spring Physics</h2>
-          <p class="section-desc">Test calibrated presets or dial in custom physical constants in real time.</p>
+          <p class="section-desc">Analytical ODE spring solver. Velocity-injected. Compositor-thread only.</p>
         </div>
       </div>
 
       <div class="glass-panel playground-grid">
-        <!-- Controls Column -->
         <div class="controls-col">
           <div>
-            <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 10px;">Motion Presets</label>
+            <label class="ctrl-label">Motion Presets</label>
             <div class="preset-selector">
-              <button class="btn-preset active" data-preset="snappy">
+              <button class="btn-preset active" data-preset="snappy" id="preset-snappy">
                 Snappy
                 <span>k: 400 | c: 30</span>
               </button>
-              <button class="btn-preset" data-preset="bouncy">
+              <button class="btn-preset" data-preset="bouncy" id="preset-bouncy">
                 Bouncy
                 <span>k: 200 | c: 10</span>
               </button>
-              <button class="btn-preset" data-preset="smooth">
+              <button class="btn-preset" data-preset="smooth" id="preset-smooth">
                 Smooth
                 <span>k: 120 | c: 20</span>
               </button>
-              <button class="btn-preset" data-preset="gentle">
+              <button class="btn-preset" data-preset="gentle" id="preset-gentle">
                 Gentle
                 <span>k: 80 | c: 14</span>
               </button>
             </div>
           </div>
 
-          <!-- Sliders -->
           <div class="slider-group">
             <div class="slider-item">
               <div class="slider-label">
@@ -88,7 +158,6 @@
               </div>
               <input type="range" id="slider-stiffness" min="30" max="600" value="400" step="10" />
             </div>
-
             <div class="slider-item">
               <div class="slider-label">
                 <span>Damping (c)</span>
@@ -96,7 +165,6 @@
               </div>
               <input type="range" id="slider-damping" min="4" max="60" value="30" step="1" />
             </div>
-
             <div class="slider-item">
               <div class="slider-label">
                 <span>Mass (m)</span>
@@ -107,7 +175,6 @@
           </div>
         </div>
 
-        <!-- Stage Column -->
         <div class="stage-col">
           <div class="interactive-stage" id="spring-stage">
             <span class="stage-hint">Click Orb to Bounce</span>
@@ -120,7 +187,6 @@
             <button class="btn-action" id="btn-rotate-spring">Rotate 360°</button>
           </div>
 
-          <!-- Dynamic Live Code Snippet -->
           <pre class="live-code-snippet" id="live-code"><code><span class="keyword">animate</span>(target, { <span class="prop">y</span>: [<span class="number">-50</span>, <span class="number">0</span>] }, {
   <span class="prop">spring</span>: <span class="string">'snappy'</span>
 });</code></pre>
@@ -128,30 +194,87 @@
       </div>
     </section>
 
-    <!-- Section 2: AI Streaming Text Simulator -->
-    <section class="section">
+    <!-- ═══ SECTION 3: TIMELINE ═══ -->
+    <section class="section" id="timeline-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">🌊 AI Streaming Text Simulator (<code style="color: var(--accent-cyan); font-family: var(--font-mono);">autoMorph</code>)</h2>
-          <p class="section-desc">High-frequency token streams without layout thrashing or main-thread frame drops.</p>
+          <h2 class="section-title">🎬 Timeline Orchestrator</h2>
+          <p class="section-desc">GSAP-style sequencing. Spring physics per entry. <code class="inline-code">at</code> position offsets. Promise-based.</p>
+        </div>
+        <button class="btn-action" id="btn-timeline-play" style="background: rgba(99,102,241,.2); border-color: var(--accent-indigo);">▶ Play Timeline</button>
+      </div>
+
+      <div class="glass-panel timeline-demo">
+        <div class="timeline-stage" id="timeline-stage">
+          <div class="tl-item" id="tl-item-1">
+            <span class="tl-label">Hero Title</span>
+            <div class="tl-bar"></div>
+          </div>
+          <div class="tl-item" id="tl-item-2">
+            <span class="tl-label">Subtitle</span>
+            <div class="tl-bar"></div>
+          </div>
+          <div class="tl-item" id="tl-item-3">
+            <span class="tl-label">Badge Row</span>
+            <div class="tl-bar"></div>
+          </div>
+          <div class="tl-item" id="tl-item-4">
+            <span class="tl-label">CTA Buttons</span>
+            <div class="tl-bar"></div>
+          </div>
+        </div>
+
+        <pre class="live-code-snippet" style="margin-top: 20px;"><code><span class="keyword">timeline</span>()
+  .add('#hero-title', { <span class="prop">y</span>: [<span class="number">40</span>, <span class="number">0</span>], <span class="prop">opacity</span>: [<span class="number">0</span>, <span class="number">1</span>] }, { <span class="prop">spring</span>: <span class="string">'snappy'</span> })
+  .add('#hero-sub',   { <span class="prop">y</span>: [<span class="number">20</span>, <span class="number">0</span>], <span class="prop">opacity</span>: [<span class="number">0</span>, <span class="number">1</span>] }, { <span class="prop">spring</span>: <span class="string">'smooth'</span>, <span class="prop">at</span>: <span class="string">'+=100'</span> })
+  .add('.badge',      { <span class="prop">y</span>: [<span class="number">10</span>, <span class="number">0</span>], <span class="prop">opacity</span>: [<span class="number">0</span>, <span class="number">1</span>] }, { <span class="prop">spring</span>: <span class="string">'bouncy'</span>, <span class="prop">stagger</span>: <span class="number">60</span> })
+  .play();</code></pre>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION 4: MAGNETIC CURSOR ═══ -->
+    <section class="section" id="magnetic-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">🧲 Magnetic Hover Physics</h2>
+          <p class="section-desc">Elements spring-attract to your cursor with real velocity injection. Try hovering these buttons.</p>
+        </div>
+      </div>
+
+      <div class="glass-panel magnetic-stage">
+        <div class="magnetic-grid">
+          <button class="mag-btn mag-btn-primary" id="mag-1">Hover Me</button>
+          <button class="mag-btn mag-btn-secondary" id="mag-2">Feel It</button>
+          <button class="mag-btn mag-btn-outline" id="mag-3">Physics</button>
+          <button class="mag-btn mag-btn-ghost" id="mag-4">Spring</button>
+          <button class="mag-btn mag-btn-icon" id="mag-5">⚡</button>
+          <button class="mag-btn mag-btn-icon" id="mag-6">🧲</button>
+        </div>
+        <p class="panel-desc" style="margin-top: 16px; text-align: center;">
+          Velocity-injected springs — the faster you move, the stronger the pull.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION 5: AI STREAMING ═══ -->
+    <section class="section" id="streaming-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">🌊 AI Streaming · autoMorph</h2>
+          <p class="section-desc">ResizeObserver + WAAPI batch height transitions. Zero rAF polling. Never drops a frame.</p>
         </div>
       </div>
 
       <div class="glass-panel streaming-grid">
-        <!-- Smooth with autoMorph -->
         <div class="chat-card">
           <div class="card-header-badge">
-            <div class="card-label">
-              <span>🤖 LLM Output</span>
-            </div>
-            <span class="badge-mode morph">autoMorph: ON (Smooth 60 FPS)</span>
+            <div class="card-label"><span>🤖 zerog-motion</span></div>
+            <span class="badge-mode morph">autoMorph ON · 60 FPS</span>
           </div>
-
           <div class="stream-output-box" id="box-morph">
-            <span id="text-morph">Click "Simulate Stream" to generate tokens...</span>
+            <span id="text-morph">Click "Simulate Stream" to see smooth morphing...</span>
             <span class="stream-cursor" id="cursor-morph" style="display: none;"></span>
           </div>
-
           <div class="stream-actions">
             <button class="btn-stream" id="btn-stream">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -159,88 +282,76 @@
               </svg>
               Simulate Stream
             </button>
-            <span class="token-counter" id="counter-morph">0 tokens streamed</span>
+            <span class="token-counter" id="counter-morph">0 tokens</span>
           </div>
         </div>
 
-        <!-- Raw DOM (Layout shift comparison) -->
         <div class="chat-card">
           <div class="card-header-badge">
-            <div class="card-label">
-              <span>⚠️ Standard Browser Reflow</span>
-            </div>
-            <span class="badge-mode raw">Standard Reflow (Jitter)</span>
+            <div class="card-label"><span>⚠️ Raw DOM</span></div>
+            <span class="badge-mode raw">Standard Reflow</span>
           </div>
-
           <div class="stream-output-box" id="box-raw">
-            <span id="text-raw">Click "Simulate Stream" to generate tokens...</span>
+            <span id="text-raw">Click "Simulate Stream" to compare...</span>
             <span class="stream-cursor" id="cursor-raw" style="display: none;"></span>
           </div>
-
           <div class="stream-actions">
-            <span style="font-size: 0.8rem; color: var(--text-dim);">Notice continuous layout shifts without spring smoothing</span>
-            <span class="token-counter" id="counter-raw">0 tokens streamed</span>
+            <span style="font-size: 0.8rem; color: var(--text-dim);">Watch the layout shift difference</span>
+            <span class="token-counter" id="counter-raw">0 tokens</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Bento Grid Stagger -->
-    <section class="section">
+    <!-- ═══ SECTION 6: SCROLL REVEAL ═══ -->
+    <section class="section" id="scroll-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">🍱 Staggered Bento Grid Reveal</h2>
-          <p class="section-desc">Harmonious entry cascading with native WAAPI hardware transforms.</p>
+          <h2 class="section-title">📜 Scroll Reveal</h2>
+          <p class="section-desc">IntersectionObserver + spring physics. Zero rAF. 6 entrance presets.</p>
         </div>
-        <button class="btn-action" id="btn-bento-reveal" style="background: rgba(99, 102, 241, 0.2); border-color: var(--accent-indigo);">
-          ↻ Replay Staggered Reveal
-        </button>
       </div>
 
       <div class="bento-grid" id="bento-container">
-        <div class="bento-card wide">
+        <div class="bento-card wide scroll-reveal-card" data-reveal="fade-up">
           <div>
             <div class="bento-icon">🪶</div>
-            <h3 class="bento-title">&lt; 2.5KB Core Runtime</h3>
-            <p class="bento-desc">Zero bloat. Minified and brotlied into a microscopic footprint so your web apps stay lightning fast.</p>
+            <h3 class="bento-title">&lt; 4KB Full Suite</h3>
+            <p class="bento-desc">Text motion, timeline, scroll reveal, magnetic cursor — all under 4KB gzipped.</p>
           </div>
-          <div class="bento-metric">2.46 KB</div>
+          <div class="bento-metric">4 KB</div>
         </div>
-
-        <div class="bento-card">
+        <div class="bento-card scroll-reveal-card" data-reveal="slide-left">
           <div>
             <div class="bento-icon">🚀</div>
-            <h3 class="bento-title">Compositor WAAPI</h3>
-            <p class="bento-desc">Offloaded directly to the browser GPU thread. Never misses a frame during heavy JS computations.</p>
+            <h3 class="bento-title">GPU Compositor</h3>
+            <p class="bento-desc">Every animation runs on the browser's compositor thread. Never blocks JS.</p>
           </div>
-          <div class="bento-metric">60/120 FPS</div>
+          <div class="bento-metric">120 FPS</div>
         </div>
-
-        <div class="bento-card">
+        <div class="bento-card scroll-reveal-card" data-reveal="zoom-in">
           <div>
-            <div class="bento-icon">🛡️</div>
-            <h3 class="bento-title">Zero Memory Leaks</h3>
-            <p class="bento-desc">Internal WeakMap garbage collection ensures discarded DOM nodes never linger in memory.</p>
+            <div class="bento-icon">🧬</div>
+            <h3 class="bento-title">ODE Spring Physics</h3>
+            <p class="bento-desc">Real analytical spring equations, not cubic-bezier approximations.</p>
           </div>
-          <div class="bento-metric">WeakMap GC</div>
+          <div class="bento-metric">ODE Solver</div>
         </div>
-
-        <div class="bento-card wide">
+        <div class="bento-card scroll-reveal-card" data-reveal="slide-right">
+          <div>
+            <div class="bento-icon">✦</div>
+            <h3 class="bento-title">Text Motion Suite</h3>
+            <p class="bento-desc">8 cinematic presets. ScrambleText. SplitText with full a11y support.</p>
+          </div>
+          <div class="bento-metric">8 Presets</div>
+        </div>
+        <div class="bento-card wide scroll-reveal-card" data-reveal="flip-up">
           <div>
             <div class="bento-icon">🤖</div>
-            <h3 class="bento-title">AI First Architecture</h3>
-            <p class="bento-desc">Packaged with verified <code style="color: var(--accent-cyan);">llms.txt</code> rules so tools like Cursor, Claude, and Copilot write zero-hallucination code.</p>
+            <h3 class="bento-title">Built for the AI Web</h3>
+            <p class="bento-desc">autoMorph handles streaming LLM responses with zero layout thrash. The library designed for the future.</p>
           </div>
-          <div class="bento-metric">llms.txt Certified</div>
-        </div>
-
-        <div class="bento-card">
-          <div>
-            <div class="bento-icon">🌐</div>
-            <h3 class="bento-title">Universal Interop</h3>
-            <p class="bento-desc">Zero React-lock-in. Seamlessly works in React, Vue, Svelte, Solid, Astro, and Vanilla JS.</p>
-          </div>
-          <div class="bento-metric">0 React Lock-in</div>
+          <div class="bento-metric">AI-Native</div>
         </div>
       </div>
     </section>
@@ -248,9 +359,7 @@
     <!-- Footer -->
     <footer>
       <p>Built with <strong style="color: var(--text-main);">zerog-motion</strong> — Weightless physics for the modern web.</p>
-      <p style="margin-top: 6px;">
-        Released under MIT License by <a href="https://github.com/bytewhisker" target="_blank" rel="noopener noreferrer">bytewhisker</a>.
-      </p>
+      <p style="margin-top: 6px;">Released under MIT License by <a href="https://github.com/bytewhisker" target="_blank" rel="noopener noreferrer">bytewhisker</a>.</p>
     </footer>
   </div>
 
