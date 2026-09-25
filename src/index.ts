@@ -6,10 +6,16 @@ export {
   solveSpring,
   deriveSpringDuration,
   sampleSpringProgress,
+  compileSpringKeyframes,
   DEFAULT_SPRING_CONFIG,
+  INDEPENDENT_TRANSFORM_PROPERTIES,
+  TRANSFORM_DIMENSION_MAP,
   type SpringSolver,
   type SpringState,
   type ResolvedSpringConfig,
+  type SpringPropertyMap,
+  type PropertyRange,
+  type CompiledSpringResult,
 } from './core/spring.js';
 
 // ─── Timeline orchestrator ──────────────────────────────────────────────────

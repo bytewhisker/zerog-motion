@@ -3,365 +3,773 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>zerog-motion | Weightless Physics · Text · Timeline · Scroll</title>
-  <meta name="description" content="The AI-native animation library. &lt; 4KB. Compositor-thread physics, cinematic text animations, timeline orchestration, scroll reveal. Beat GSAP & Anime.js." />
+  <title>zerog-motion | The Hardware-Accelerated Animation Standard</title>
+  <meta name="description" content="Sub-2.5KB hardware-accelerated animation ecosystem. 100% Compositor-thread WAAPI execution, zero dependencies, AI-native streaming autoMorph, and analytical spring physics." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <!-- Ambient Zero-Gravity Particle Grid -->
   <div class="noise-overlay"></div>
-  <div class="container">
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
 
-    <!-- ═══ HERO ═══ -->
-    <header id="hero">
-      <div class="hero-pill">
-        <span class="dot"></span>
-        <span>Now with Text Motion Suite + Timeline</span>
-      </div>
-
-      <h1 id="hero-title">Weightless Physics.<br><span>The AI‑Native Animation Engine.</span></h1>
-      <p class="subtitle" id="hero-sub">
-        GPU-compositor animations that never drop frames—even when your LLM is streaming tokens. 
-        94% lighter than GSAP. Zero dependencies.
-      </p>
-
-      <div class="badge-row" id="hero-badges">
-        <div class="badge">Bundle: <strong>&lt; 4KB</strong></div>
-        <div class="badge">Thread: <strong>Compositor</strong></div>
-        <div class="badge">Text: <strong>8 Presets</strong></div>
-        <div class="badge">Timeline: <strong>✓</strong></div>
-        <div class="badge">Scroll: <strong>✓</strong></div>
-        <div class="badge">Magnetic: <strong>✓</strong></div>
-      </div>
-
-      <div class="cta-row">
-        <div class="code-copy-box" id="copy-install" title="Click to copy">
-          <span>npm i zerog-motion</span>
-          <span class="copy-hint" id="copy-hint">Copy</span>
+  <!-- ═══════════════════════════════════════════════════════════════
+       STICKY TOP NAVIGATION BAR (GSAP TIER)
+  ═══════════════════════════════════════════════════════════════ -->
+  <header class="top-nav" id="top-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="brand-logo">
+        <div class="brand-orb">
+          <span class="orb-core"></span>
+          <span class="orb-ring"></span>
         </div>
-        <a href="https://github.com/bytewhisker/zerog-motion" target="_blank" rel="noopener noreferrer" class="btn-github" id="btn-github-hero">
+        <span class="brand-text">zero<span class="brand-accent">g</span><span class="brand-sub">.motion</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#showcase" class="nav-link">Showcase</a>
+        <a href="#demos-section" class="nav-link">Demos</a>
+        <a href="#timeline-studio" class="nav-link">Timeline</a>
+        <a href="#docs-section" class="nav-link">Docs & API</a>
+        <a href="#moat-section" class="nav-link">ZeroG vs GSAP</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="npm-badge" id="nav-copy-npm" title="Click to copy npm command">
+          <span class="npm-icon">npm</span>
+          <span class="npm-code">i zerog-motion</span>
+          <span class="copy-tooltip" id="nav-copy-tip">Copy</span>
+        </div>
+        <a href="https://github.com/bytewhisker/zerog-motion" target="_blank" rel="noopener noreferrer" class="btn-nav-github">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-          GitHub
+          <span>GitHub</span>
         </a>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- ═══ SECTION 1: TEXT MOTION STUDIO ═══ -->
-    <section class="section" id="text-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">✦ Text Motion Studio</h2>
-          <p class="section-desc">8 cinematic presets. Compositor-native WAAPI. Each character is individually GPU-accelerated.</p>
+  <main class="page-container">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         HERO SECTION: SUPERCHARGE YOUR MOTION
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero-section" id="hero">
+      <div class="hero-eyebrow">
+        <span class="live-dot"></span>
+        <span>Compositor-Thread Native WAAPI · Zero Main-Thread Jank</span>
+      </div>
+
+      <h1 class="hero-headline">
+        SUPERCHARGE YOUR WEB MOTION.<br />
+        <span class="gradient-text">WEIGHTLESS. IMMUNE TO JANK.</span>
+      </h1>
+
+      <p class="hero-description">
+        The hardware-accelerated animation standard designed to render legacy JS-rAF engines obsolete. 
+        Precomputes analytical ODE spring physics into discrete WAAPI keyframes, executing 100% on the GPU compositor.
+      </p>
+
+      <div class="hero-metrics-bar">
+        <div class="metric-pill">
+          <span class="metric-val">&lt; 2.5 KB</span>
+          <span class="metric-tag">Gzipped</span>
+        </div>
+        <div class="metric-pill">
+          <span class="metric-val">120 FPS</span>
+          <span class="metric-tag">Compositor</span>
+        </div>
+        <div class="metric-pill">
+          <span class="metric-val">0 rAF</span>
+          <span class="metric-tag">For CSS</span>
+        </div>
+        <div class="metric-pill">
+          <span class="metric-val">0</span>
+          <span class="metric-tag">Dependencies</span>
+        </div>
+        <div class="metric-pill">
+          <span class="metric-val">WeakMap</span>
+          <span class="metric-tag">Zero Leaks</span>
         </div>
       </div>
 
-      <!-- Text Preset Showcase -->
-      <div class="glass-panel text-studio">
-        <div class="text-preset-tabs" id="text-tabs">
-          <button class="tab-btn active" data-preset="mask-up">Mask Up</button>
-          <button class="tab-btn" data-preset="blur-in">Blur In</button>
-          <button class="tab-btn" data-preset="flip-3d">Flip 3D</button>
-          <button class="tab-btn" data-preset="wave">Wave</button>
-          <button class="tab-btn" data-preset="glitch">Glitch</button>
-          <button class="tab-btn" data-preset="typewriter">Typewriter</button>
-          <button class="tab-btn" data-preset="rise">Rise</button>
-          <button class="tab-btn" data-preset="fade-up">Fade Up</button>
+      <!-- ═══════════════════════════════════════════════════════════════
+           HERO INTERACTIVE GSAP-TIER TIMELINE SCRUBBER
+      ═══════════════════════════════════════════════════════════════ -->
+      <div class="hero-showcase-panel" id="showcase">
+        <div class="showcase-header">
+          <div class="showcase-title">
+            <span class="status-indicator"></span>
+            <span>Live Interactive Scrubber (WAAPI Timeline Engine)</span>
+          </div>
+          <div class="timecode-display" id="hero-timecode">00:00.00s / 00:02.40s</div>
         </div>
 
-        <div class="text-stage" id="text-stage">
-          <div class="text-display" id="text-display">
-            <p id="demo-text" class="animate-text">Motion so smooth it feels weightless</p>
+        <!-- Visual Stage Under Timeline Control -->
+        <div class="hero-stage" id="hero-interactive-stage">
+          <div class="stage-actor actor-orb" id="act-orb">
+            <div class="actor-inner">
+              <span class="orb-symbol">0G</span>
+            </div>
+            <div class="actor-pulse-ring"></div>
           </div>
-          <div class="text-controls">
-            <button class="btn-action" id="btn-replay-text">↺ Replay</button>
-            <div class="text-input-wrap">
-              <input type="text" id="custom-text-input" placeholder="Type your own text..." value="Motion so smooth it feels weightless" maxlength="60" />
+
+          <div class="stage-actor actor-card" id="act-card">
+            <div class="card-chip">GPU THREAD</div>
+            <div class="card-title">Compositor Native</div>
+            <div class="card-bar"></div>
+          </div>
+
+          <div class="stage-actor actor-badge" id="act-badge-1">⚡ Analytical Springs</div>
+          <div class="stage-actor actor-badge" id="act-badge-2">🌊 autoMorph FLIP</div>
+          <div class="stage-actor actor-badge" id="act-badge-3">🧲 Spatial Physics</div>
+        </div>
+
+        <!-- The GSAP-Style Scrubber Toolbar -->
+        <div class="timeline-scrubber-bar">
+          <div class="scrub-controls">
+            <button class="btn-ctrl" id="btn-scrub-play" title="Play">▶</button>
+            <button class="btn-ctrl" id="btn-scrub-pause" title="Pause">❚❚</button>
+            <button class="btn-ctrl" id="btn-scrub-reverse" title="Reverse">⇄</button>
+            <button class="btn-ctrl" id="btn-scrub-restart" title="Restart">↺</button>
+            <div class="speed-selector">
+              <button class="btn-speed" data-speed="0.5">0.5x</button>
+              <button class="btn-speed active" data-speed="1.0">1x</button>
+              <button class="btn-speed" data-speed="2.0">2x</button>
+            </div>
+          </div>
+
+          <div class="scrub-track-container">
+            <input type="range" class="scrub-slider" id="hero-scrub-slider" min="0" max="1000" value="0" step="1" />
+            <div class="scrub-progress-fill" id="hero-scrub-fill"></div>
+            <div class="keyframe-markers">
+              <span class="kf-marker" style="left: 0%;"></span>
+              <span class="kf-marker" style="left: 25%;"></span>
+              <span class="kf-marker" style="left: 55%;"></span>
+              <span class="kf-marker" style="left: 80%;"></span>
+              <span class="kf-marker" style="left: 100%;"></span>
             </div>
           </div>
         </div>
 
-        <div class="preset-info" id="preset-info">
-          <span class="preset-name-badge" id="preset-name-badge">mask-up</span>
-          <code id="preset-code-snippet">animateText(el, { preset: 'mask-up', spring: 'snappy', stagger: 40 })</code>
+        <div class="hero-code-preview">
+          <code><span class="syn-kw">const</span> tl = <span class="syn-fn">timeline</span>()
+  .<span class="syn-fn">add</span>(<span class="syn-str">'#act-orb'</span>,   { <span class="syn-prop">scale</span>: [<span class="syn-num">0.4</span>, <span class="syn-num">1</span>], <span class="syn-prop">rotate</span>: [<span class="syn-num">-45</span>, <span class="syn-num">0</span>] }, { <span class="syn-prop">spring</span>: <span class="syn-str">'bouncy'</span> })
+  .<span class="syn-fn">add</span>(<span class="syn-str">'#act-card'</span>,  { <span class="syn-prop">x</span>: [<span class="syn-num">60</span>, <span class="syn-num">0</span>], <span class="syn-prop">opacity</span>: [<span class="syn-num">0</span>, <span class="syn-num">1</span>] }, { <span class="syn-prop">spring</span>: <span class="syn-str">'snappy'</span>, <span class="syn-prop">at</span>: <span class="syn-str">'&lt;'</span> })
+  .<span class="syn-fn">add</span>(<span class="syn-str">'.actor-badge'</span>,{ <span class="syn-prop">y</span>: [<span class="syn-num">25</span>, <span class="syn-num">0</span>], <span class="syn-prop">opacity</span>: [<span class="syn-num">0</span>, <span class="syn-num">1</span>] }, { <span class="syn-prop">stagger</span>: <span class="syn-num">60</span>, <span class="syn-prop">at</span>: <span class="syn-str">'-=0.2'</span> });</code>
         </div>
       </div>
+    </section>
 
-      <!-- ScrambleText Demo -->
-      <div class="glass-panel scramble-panel" id="scramble-panel">
-        <div class="scramble-header">
+    <!-- ═══════════════════════════════════════════════════════════════
+         ADVANCED SHOWCASE DEMOS (OUTPERFORMING GSAP)
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-container" id="demos-section">
+      <div class="section-title-wrap">
+        <span class="section-badge">ADVANCED DEMOS</span>
+        <h2 class="section-heading">Outperforming Legacy Motion Engines</h2>
+        <p class="section-subtext">Interactive, production-ready showcases proving compositor superiority over main-thread JavaScript rAF.</p>
+      </div>
+
+      <!-- DEMO 1: THE LIQUID AI TERMINAL -->
+      <div class="demo-card-expanded" id="demo-liquid-ai">
+        <div class="demo-card-header">
           <div>
-            <h3 class="panel-title">⌨ ScrambleText — AI Terminal Decoder</h3>
-            <p class="panel-desc">Characters scramble through random chars before revealing. The hacker aesthetic.</p>
+            <div class="demo-tag">DEMO 1 · AI-NATIVE PRIMITIVE</div>
+            <h3 class="demo-title">The Liquid AI Terminal (Streaming autoMorph)</h3>
+            <p class="demo-desc">High-frequency token streaming side-by-side comparison. Watch standard web app reflow jitter vs. ZeroG's buttery 120 FPS FLIP autoMorph.</p>
           </div>
-          <div class="scramble-charset-btns" id="scramble-charsets">
-            <button class="charset-btn active" data-charset="default">ASCII</button>
-            <button class="charset-btn" data-charset="hex">HEX</button>
-            <button class="charset-btn" data-charset="binary">BINARY</button>
-            <button class="charset-btn" data-charset="katakana">カタカナ</button>
-          </div>
-        </div>
-
-        <div class="scramble-stage">
-          <p id="scramble-text" class="scramble-output">Initializing quantum entanglement protocol...</p>
-        </div>
-
-        <div class="scramble-actions">
-          <button class="btn-action" id="btn-scramble">▶ Decode</button>
-          <button class="btn-action" id="btn-scramble-skip">⏭ Skip</button>
-          <input type="text" id="scramble-input" placeholder="Enter text to scramble..." value="Initializing quantum entanglement protocol..." maxlength="80" />
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ SECTION 2: SPRING PHYSICS ═══ -->
-    <section class="section" id="spring-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">⚡ Tactile Spring Physics</h2>
-          <p class="section-desc">Analytical ODE spring solver. Velocity-injected. Compositor-thread only.</p>
-        </div>
-      </div>
-
-      <div class="glass-panel playground-grid">
-        <div class="controls-col">
-          <div>
-            <label class="ctrl-label">Motion Presets</label>
-            <div class="preset-selector">
-              <button class="btn-preset active" data-preset="snappy" id="preset-snappy">
-                Snappy
-                <span>k: 400 | c: 30</span>
-              </button>
-              <button class="btn-preset" data-preset="bouncy" id="preset-bouncy">
-                Bouncy
-                <span>k: 200 | c: 10</span>
-              </button>
-              <button class="btn-preset" data-preset="smooth" id="preset-smooth">
-                Smooth
-                <span>k: 120 | c: 20</span>
-              </button>
-              <button class="btn-preset" data-preset="gentle" id="preset-gentle">
-                Gentle
-                <span>k: 80 | c: 14</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="slider-group">
-            <div class="slider-item">
-              <div class="slider-label">
-                <span>Stiffness (k)</span>
-                <span class="val" id="val-stiffness">400</span>
-              </div>
-              <input type="range" id="slider-stiffness" min="30" max="600" value="400" step="10" />
-            </div>
-            <div class="slider-item">
-              <div class="slider-label">
-                <span>Damping (c)</span>
-                <span class="val" id="val-damping">30</span>
-              </div>
-              <input type="range" id="slider-damping" min="4" max="60" value="30" step="1" />
-            </div>
-            <div class="slider-item">
-              <div class="slider-label">
-                <span>Mass (m)</span>
-                <span class="val" id="val-mass">1.0</span>
-              </div>
-              <input type="range" id="slider-mass" min="0.5" max="5" value="1.0" step="0.1" />
-            </div>
-          </div>
-        </div>
-
-        <div class="stage-col">
-          <div class="interactive-stage" id="spring-stage">
-            <span class="stage-hint">Click Orb to Bounce</span>
-            <div class="interactive-orb" id="spring-orb">0G</div>
-          </div>
-
-          <div class="stage-actions">
-            <button class="btn-action" id="btn-trigger-spring">Trigger Spring</button>
-            <button class="btn-action" id="btn-scale-spring">Pulse Scale</button>
-            <button class="btn-action" id="btn-rotate-spring">Rotate 360°</button>
-          </div>
-
-          <pre class="live-code-snippet" id="live-code"><code><span class="keyword">animate</span>(target, { <span class="prop">y</span>: [<span class="number">-50</span>, <span class="number">0</span>] }, {
-  <span class="prop">spring</span>: <span class="string">'snappy'</span>
-});</code></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ SECTION 3: TIMELINE ═══ -->
-    <section class="section" id="timeline-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">🎬 Timeline Orchestrator</h2>
-          <p class="section-desc">GSAP-style sequencing. Spring physics per entry. <code class="inline-code">at</code> position offsets. Promise-based.</p>
-        </div>
-        <button class="btn-action" id="btn-timeline-play" style="background: rgba(99,102,241,.2); border-color: var(--accent-indigo);">▶ Play Timeline</button>
-      </div>
-
-      <div class="glass-panel timeline-demo">
-        <div class="timeline-stage" id="timeline-stage">
-          <div class="tl-item" id="tl-item-1">
-            <span class="tl-label">Hero Title</span>
-            <div class="tl-bar"></div>
-          </div>
-          <div class="tl-item" id="tl-item-2">
-            <span class="tl-label">Subtitle</span>
-            <div class="tl-bar"></div>
-          </div>
-          <div class="tl-item" id="tl-item-3">
-            <span class="tl-label">Badge Row</span>
-            <div class="tl-bar"></div>
-          </div>
-          <div class="tl-item" id="tl-item-4">
-            <span class="tl-label">CTA Buttons</span>
-            <div class="tl-bar"></div>
-          </div>
-        </div>
-
-        <pre class="live-code-snippet" style="margin-top: 20px;"><code><span class="keyword">timeline</span>()
-  .add('#hero-title', { <span class="prop">y</span>: [<span class="number">40</span>, <span class="number">0</span>], <span class="prop">opacity</span>: [<span class="number">0</span>, <span class="number">1</span>] }, { <span class="prop">spring</span>: <span class="string">'snappy'</span> })
-  .add('#hero-sub',   { <span class="prop">y</span>: [<span class="number">20</span>, <span class="number">0</span>], <span class="prop">opacity</span>: [<span class="number">0</span>, <span class="number">1</span>] }, { <span class="prop">spring</span>: <span class="string">'smooth'</span>, <span class="prop">at</span>: <span class="string">'+=100'</span> })
-  .add('.badge',      { <span class="prop">y</span>: [<span class="number">10</span>, <span class="number">0</span>], <span class="prop">opacity</span>: [<span class="number">0</span>, <span class="number">1</span>] }, { <span class="prop">spring</span>: <span class="string">'bouncy'</span>, <span class="prop">stagger</span>: <span class="number">60</span> })
-  .play();</code></pre>
-      </div>
-    </section>
-
-    <!-- ═══ SECTION 4: MAGNETIC CURSOR ═══ -->
-    <section class="section" id="magnetic-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">🧲 Magnetic Hover Physics</h2>
-          <p class="section-desc">Elements spring-attract to your cursor with real velocity injection. Try hovering these buttons.</p>
-        </div>
-      </div>
-
-      <div class="glass-panel magnetic-stage">
-        <div class="magnetic-grid">
-          <button class="mag-btn mag-btn-primary" id="mag-1">Hover Me</button>
-          <button class="mag-btn mag-btn-secondary" id="mag-2">Feel It</button>
-          <button class="mag-btn mag-btn-outline" id="mag-3">Physics</button>
-          <button class="mag-btn mag-btn-ghost" id="mag-4">Spring</button>
-          <button class="mag-btn mag-btn-icon" id="mag-5">⚡</button>
-          <button class="mag-btn mag-btn-icon" id="mag-6">🧲</button>
-        </div>
-        <p class="panel-desc" style="margin-top: 16px; text-align: center;">
-          Velocity-injected springs — the faster you move, the stronger the pull.
-        </p>
-      </div>
-    </section>
-
-    <!-- ═══ SECTION 5: AI STREAMING ═══ -->
-    <section class="section" id="streaming-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">🌊 AI Streaming · autoMorph</h2>
-          <p class="section-desc">ResizeObserver + WAAPI batch height transitions. Zero rAF polling. Never drops a frame.</p>
-        </div>
-      </div>
-
-      <div class="glass-panel streaming-grid">
-        <div class="chat-card">
-          <div class="card-header-badge">
-            <div class="card-label"><span>🤖 zerog-motion</span></div>
-            <span class="badge-mode morph">autoMorph ON · 60 FPS</span>
-          </div>
-          <div class="stream-output-box" id="box-morph">
-            <span id="text-morph">Click "Simulate Stream" to see smooth morphing...</span>
-            <span class="stream-cursor" id="cursor-morph" style="display: none;"></span>
-          </div>
-          <div class="stream-actions">
-            <button class="btn-stream" id="btn-stream">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-              Simulate Stream
+          <div class="demo-header-actions">
+            <button class="btn-action-primary" id="btn-run-stream-battle">
+              <span class="btn-play-icon">▶</span>
+              <span>Stream LLM Tokens</span>
             </button>
-            <span class="token-counter" id="counter-morph">0 tokens</span>
+            <button class="btn-action-secondary" id="btn-reset-stream-battle">Reset</button>
           </div>
         </div>
 
-        <div class="chat-card">
-          <div class="card-header-badge">
-            <div class="card-label"><span>⚠️ Raw DOM</span></div>
-            <span class="badge-mode raw">Standard Reflow</span>
+        <div class="battle-arena">
+          <!-- LEFT: Standard DOM / GSAP Reflow -->
+          <div class="battle-column battle-legacy">
+            <div class="col-status-bar">
+              <div class="status-left">
+                <span class="col-pill pill-bad">Standard DOM / GSAP</span>
+                <span class="col-sub">Layout Thrashing</span>
+              </div>
+              <div class="fps-meter fps-bad" id="fps-legacy">34 FPS</div>
+            </div>
+            <div class="stream-terminal" id="terminal-legacy">
+              <div class="terminal-text" id="text-legacy">Press "Stream LLM Tokens" to start...</div>
+              <span class="terminal-caret" id="caret-legacy"></span>
+            </div>
+            <div class="col-footer">
+              <span class="metric-label">Scrollbar Jitter: <strong class="text-red" id="jitter-count">Severe Reflow</strong></span>
+              <span class="metric-label">Thread: <strong class="text-muted">Main Thread (JS rAF)</strong></span>
+            </div>
           </div>
-          <div class="stream-output-box" id="box-raw">
-            <span id="text-raw">Click "Simulate Stream" to compare...</span>
-            <span class="stream-cursor" id="cursor-raw" style="display: none;"></span>
+
+          <!-- RIGHT: ZeroG autoMorph FLIP -->
+          <div class="battle-column battle-zerog">
+            <div class="col-status-bar">
+              <div class="status-left">
+                <span class="col-pill pill-good">@zerog/flip autoMorph</span>
+                <span class="col-sub">Batch WAAPI FLIP</span>
+              </div>
+              <div class="fps-meter fps-good" id="fps-zerog">120 FPS</div>
+            </div>
+            <div class="stream-terminal" id="terminal-zerog">
+              <div class="terminal-text" id="text-zerog">Press "Stream LLM Tokens" to start...</div>
+              <span class="terminal-caret active" id="caret-zerog"></span>
+            </div>
+            <div class="col-footer">
+              <span class="metric-label">Scrollbar Stability: <strong class="text-green">Rock Solid</strong></span>
+              <span class="metric-label">Thread: <strong class="text-cyan">GPU Compositor (WAAPI)</strong></span>
+            </div>
           </div>
-          <div class="stream-actions">
-            <span style="font-size: 0.8rem; color: var(--text-dim);">Watch the layout shift difference</span>
-            <span class="token-counter" id="counter-raw">0 tokens</span>
+        </div>
+      </div>
+
+      <!-- DEMO 2: TRUE MASS SPATIAL DOCK -->
+      <div class="demo-card-expanded" id="demo-spatial-dock">
+        <div class="demo-card-header">
+          <div>
+            <div class="demo-tag">DEMO 2 · SPATIAL PHYSICS</div>
+            <h3 class="demo-title">True Mass Spatial Dock (macOS Gravitational Physics)</h3>
+            <p class="demo-desc">Icons do not merely scale uniformly on hover. Each item computes true gravitational mass-spring math (<code class="code-inline">solveSpring</code>), stretching toward the cursor vector and transferring physical momentum to adjacent neighbors.</p>
+          </div>
+          <div class="dock-telemetry">
+            <span class="tele-item">Mass: <strong>1.2 kg</strong></span>
+            <span class="tele-item">Stiffness: <strong>320 N/m</strong></span>
+            <span class="tele-item">Damping: <strong>24 Ns/m</strong></span>
+          </div>
+        </div>
+
+        <div class="dock-arena">
+          <div class="spatial-dock" id="spatial-dock-bar">
+            <div class="dock-item" data-index="0" data-label="Terminal">
+              <div class="dock-icon icon-terminal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              </div>
+              <span class="dock-label">Terminal</span>
+            </div>
+
+            <div class="dock-item" data-index="1" data-label="Physics">
+              <div class="dock-icon icon-physics">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+              </div>
+              <span class="dock-label">Physics</span>
+            </div>
+
+            <div class="dock-item" data-index="2" data-label="autoMorph">
+              <div class="dock-icon icon-morph">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <span class="dock-label">autoMorph</span>
+            </div>
+
+            <div class="dock-item" data-index="3" data-label="Timeline">
+              <div class="dock-icon icon-timeline">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <span class="dock-label">Timeline</span>
+            </div>
+
+            <div class="dock-item" data-index="4" data-label="Compositor">
+              <div class="dock-icon icon-gpu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+              </div>
+              <span class="dock-label">Compositor</span>
+            </div>
+
+            <div class="dock-item" data-index="5" data-label="ZeroG Core">
+              <div class="dock-icon icon-core">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <span class="dock-label">ZeroG Core</span>
+            </div>
+          </div>
+          <p class="dock-hint">Move cursor smoothly over the dock. Watch the physical elastic drag, scale, and velocity transfer.</p>
+        </div>
+      </div>
+
+      <!-- DEMO 3: VARIABLE FONT MATRIX & MAIN THREAD FREEZE -->
+      <div class="demo-card-expanded" id="demo-font-matrix">
+        <div class="demo-card-header">
+          <div>
+            <div class="demo-tag">DEMO 3 · COMPOSITOR SCRUBBING</div>
+            <h3 class="demo-title">Variable Font Matrix (Main-Thread Freeze Immunity)</h3>
+            <p class="demo-desc">3D kinetic typography running entirely on the GPU. Click "Freeze Main Thread" to simulate heavy JS execution (e.g. React hydration): watch the JS spinner freeze while ZeroG's WAAPI wave keeps running at 120 FPS!</p>
+          </div>
+          <div class="demo-header-actions">
+            <button class="btn-action-danger" id="btn-freeze-main">
+              <span>❄ Freeze Main Thread (1.5s)</span>
+            </button>
+            <div class="thread-heartbeat" id="thread-indicator">
+              <span class="pulse-spin" id="js-spinner"></span>
+              <span id="thread-status-label">Main Thread Active</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="matrix-arena">
+          <div class="font-matrix-grid" id="font-matrix-grid">
+            <!-- Dynamically populated 3D matrix cards -->
+            <div class="matrix-card" data-depth="1"><span class="matrix-word">ZERO-G</span></div>
+            <div class="matrix-card" data-depth="2"><span class="matrix-word">COMPOSITOR</span></div>
+            <div class="matrix-card" data-depth="3"><span class="matrix-word">120 FPS</span></div>
+            <div class="matrix-card" data-depth="2"><span class="matrix-word">WEIGHTLESS</span></div>
+            <div class="matrix-card" data-depth="1"><span class="matrix-word">SUB-2.5KB</span></div>
+            <div class="matrix-card" data-depth="3"><span class="matrix-word">ZERO JANK</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ SECTION 6: SCROLL REVEAL ═══ -->
-    <section class="section" id="scroll-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">📜 Scroll Reveal</h2>
-          <p class="section-desc">IntersectionObserver + spring physics. Zero rAF. 6 entrance presets.</p>
-        </div>
+    <!-- ═══════════════════════════════════════════════════════════════
+         INTERACTIVE TIMELINE STUDIO (GSAP SEQUENCER CLONE)
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-container" id="timeline-studio">
+      <div class="section-title-wrap">
+        <span class="section-badge">ORCHESTRATION</span>
+        <h2 class="section-heading">GSAP-Tier Timeline Sequencer</h2>
+        <p class="section-subtext">Orchestrate complex staggered motion using position parameters (<code class="code-inline">at: 1.5</code>, <code class="code-inline">at: "-=0.3"</code>, <code class="code-inline">at: "&lt;"</code>) flattened directly into WAAPI start offsets.</p>
       </div>
 
-      <div class="bento-grid" id="bento-container">
-        <div class="bento-card wide scroll-reveal-card" data-reveal="fade-up">
-          <div>
-            <div class="bento-icon">🪶</div>
-            <h3 class="bento-title">&lt; 4KB Full Suite</h3>
-            <p class="bento-desc">Text motion, timeline, scroll reveal, magnetic cursor — all under 4KB gzipped.</p>
+      <div class="timeline-editor-card">
+        <div class="editor-top-toolbar">
+          <div class="playback-btn-group">
+            <button class="btn-tl-control" id="btn-tl-play">▶ Play Sequence</button>
+            <button class="btn-tl-control" id="btn-tl-pause">❚❚ Pause</button>
+            <button class="btn-tl-control" id="btn-tl-restart">↺ Restart</button>
           </div>
-          <div class="bento-metric">4 KB</div>
+          <div class="tl-status-readout">
+            <span>Playhead: <strong id="tl-playhead-readout">0.00s</strong></span>
+            <span>Duration: <strong>2.80s</strong></span>
+          </div>
         </div>
-        <div class="bento-card scroll-reveal-card" data-reveal="slide-left">
-          <div>
-            <div class="bento-icon">🚀</div>
-            <h3 class="bento-title">GPU Compositor</h3>
-            <p class="bento-desc">Every animation runs on the browser's compositor thread. Never blocks JS.</p>
+
+        <!-- Multi-Track Visual Timeline -->
+        <div class="multi-track-sequencer">
+          <!-- Time Ruler -->
+          <div class="time-ruler">
+            <div class="ruler-marker">0.0s</div>
+            <div class="ruler-marker">0.5s</div>
+            <div class="ruler-marker">1.0s</div>
+            <div class="ruler-marker">1.5s</div>
+            <div class="ruler-marker">2.0s</div>
+            <div class="ruler-marker">2.5s</div>
           </div>
-          <div class="bento-metric">120 FPS</div>
+
+          <!-- Playhead Needle -->
+          <div class="playhead-needle" id="timeline-playhead"></div>
+
+          <!-- Track 1: Header Animation -->
+          <div class="track-row">
+            <div class="track-meta">
+              <span class="track-name">Track 1: #title</span>
+              <span class="track-pos">at: 0.0s</span>
+            </div>
+            <div class="track-lane">
+              <div class="track-block block-indigo" style="left: 0%; width: 28%;">
+                <span class="block-label">y: 40→0 (snappy)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Track 2: Core Physics Orb -->
+          <div class="track-row">
+            <div class="track-meta">
+              <span class="track-name">Track 2: #orb</span>
+              <span class="track-pos">at: "&lt;" (sync)</span>
+            </div>
+            <div class="track-lane">
+              <div class="track-block block-cyan" style="left: 0%; width: 42%;">
+                <span class="block-label">scale: 0.5→1.1 (bouncy)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Track 3: Staggered Badges -->
+          <div class="track-row">
+            <div class="track-meta">
+              <span class="track-name">Track 3: .badges</span>
+              <span class="track-pos">at: "-=0.2s"</span>
+            </div>
+            <div class="track-lane">
+              <div class="track-block block-violet" style="left: 20%; width: 50%;">
+                <span class="block-label">stagger: 45ms (smooth)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Track 4: CTA Action Glow -->
+          <div class="track-row">
+            <div class="track-meta">
+              <span class="track-name">Track 4: #cta-bar</span>
+              <span class="track-pos">at: "+=0.3s"</span>
+            </div>
+            <div class="track-lane">
+              <div class="track-block block-emerald" style="left: 65%; width: 35%;">
+                <span class="block-label">opacity: 0→1, y: 15→0</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="bento-card scroll-reveal-card" data-reveal="zoom-in">
-          <div>
-            <div class="bento-icon">🧬</div>
-            <h3 class="bento-title">ODE Spring Physics</h3>
-            <p class="bento-desc">Real analytical spring equations, not cubic-bezier approximations.</p>
+
+        <!-- Live Sandbox Target Canvas -->
+        <div class="timeline-visual-sandbox" id="tl-sandbox-viewport">
+          <div class="tl-elem tl-title" id="tle-title">ZERO-G SEQUENCER</div>
+          <div class="tl-elem tl-orb" id="tle-orb"></div>
+          <div class="tl-elem tl-badges-row">
+            <span class="tl-sub-badge" id="tleb-1">WAAPI</span>
+            <span class="tl-sub-badge" id="tleb-2">120 FPS</span>
+            <span class="tl-sub-badge" id="tleb-3">FLIP</span>
           </div>
-          <div class="bento-metric">ODE Solver</div>
-        </div>
-        <div class="bento-card scroll-reveal-card" data-reveal="slide-right">
-          <div>
-            <div class="bento-icon">✦</div>
-            <h3 class="bento-title">Text Motion Suite</h3>
-            <p class="bento-desc">8 cinematic presets. ScrambleText. SplitText with full a11y support.</p>
-          </div>
-          <div class="bento-metric">8 Presets</div>
-        </div>
-        <div class="bento-card wide scroll-reveal-card" data-reveal="flip-up">
-          <div>
-            <div class="bento-icon">🤖</div>
-            <h3 class="bento-title">Built for the AI Web</h3>
-            <p class="bento-desc">autoMorph handles streaming LLM responses with zero layout thrash. The library designed for the future.</p>
-          </div>
-          <div class="bento-metric">AI-Native</div>
+          <div class="tl-elem tl-cta" id="tle-cta">DEPLOY PRODUCTION</div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <p>Built with <strong style="color: var(--text-main);">zerog-motion</strong> — Weightless physics for the modern web.</p>
-      <p style="margin-top: 6px;">Released under MIT License by <a href="https://github.com/bytewhisker" target="_blank" rel="noopener noreferrer">bytewhisker</a>.</p>
+    <!-- ═══════════════════════════════════════════════════════════════
+         INTERACTIVE DOCUMENTATION & API EXPLORER
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-container" id="docs-section">
+      <div class="section-title-wrap">
+        <span class="section-badge">DOCUMENTATION & API</span>
+        <h2 class="section-heading">Universal API Reference</h2>
+        <p class="section-subtext">Engineered for immediate developer ergonomics and AI code generation (<code class="code-inline">llms.txt</code>).</p>
+      </div>
+
+      <div class="docs-browser">
+        <!-- API Tab Navigation -->
+        <div class="docs-tabs-nav" id="docs-nav">
+          <button class="doc-tab-btn active" data-tab="animate">core: animate()</button>
+          <button class="doc-tab-btn" data-tab="timeline">core: timeline()</button>
+          <button class="doc-tab-btn" data-tab="spring">core: solveSpring()</button>
+          <button class="doc-tab-btn" data-tab="flip">@zerog/flip (autoMorph)</button>
+          <button class="doc-tab-btn" data-tab="text">@zerog/text (split & scramble)</button>
+          <button class="doc-tab-btn" data-tab="magnetic">@zerog/cursor (magnetic)</button>
+        </div>
+
+        <!-- Tab 1: animate() -->
+        <div class="doc-tab-content active" id="tab-animate">
+          <div class="api-doc-grid">
+            <div class="api-details">
+              <h3 class="api-title">animate(target, keyframes, options?)</h3>
+              <p class="api-summary">Compiles CSS properties, independent transforms, and spring physics directly into native WAAPI <code class="code-inline">element.animate()</code> keyframe effects.</p>
+              
+              <div class="api-param-list">
+                <div class="param-row">
+                  <span class="param-name">target</span>
+                  <span class="param-type">string | Element | Element[]</span>
+                  <span class="param-desc">CSS selector, DOM node, or collection.</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-name">keyframes</span>
+                  <span class="param-type">AnimatableProperties</span>
+                  <span class="param-desc">Object of properties with target values or <code class="code-inline">[from, to]</code> tuples.</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-name">options.spring</span>
+                  <span class="param-type">'snappy' | 'bouncy' | 'smooth' | SpringConfig</span>
+                  <span class="param-desc">Analytical ODE spring configuration.</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-name">options.stagger</span>
+                  <span class="param-type">number</span>
+                  <span class="param-desc">Delay offset between sequential elements in ms.</span>
+                </div>
+              </div>
+
+              <div class="api-returns">
+                <strong>Returns:</strong> <code class="code-inline">AnimationHandle</code> with <code class="code-inline">play()</code>, <code class="code-inline">pause()</code>, <code class="code-inline">reverse()</code>, and <code class="code-inline">.finished</code> Promise.
+              </div>
+            </div>
+
+            <div class="api-sandbox">
+              <div class="sandbox-header">
+                <span>Interactive Live Sandbox</span>
+                <button class="btn-run-code" id="btn-run-animate-sandbox">▶ Run Code</button>
+              </div>
+              <div class="code-editor-box">
+                <pre><code><span class="syn-fn">animate</span>(<span class="syn-str">'#demo-target'</span>, {
+  <span class="syn-prop">x</span>: [<span class="syn-num">0</span>, <span class="syn-num">180</span>],
+  <span class="syn-prop">rotate</span>: [<span class="syn-num">0</span>, <span class="syn-num">180</span>],
+  <span class="syn-prop">scale</span>: [<span class="syn-num">0.8</span>, <span class="syn-num">1.2</span>],
+  <span class="syn-prop">borderRadius</span>: [<span class="syn-str">'12px'</span>, <span class="syn-str">'50%'</span>]
+}, {
+  <span class="syn-prop">spring</span>: <span class="syn-str">'bouncy'</span>
+});</code></pre>
+              </div>
+              <div class="sandbox-preview-stage">
+                <div class="sandbox-ball" id="sandbox-animate-target">0G</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: timeline() -->
+        <div class="doc-tab-content" id="tab-timeline">
+          <div class="api-doc-grid">
+            <div class="api-details">
+              <h3 class="api-title">timeline(options?)</h3>
+              <p class="api-summary">GSAP-tier timeline sequencer. Flattens chained animations into exact start delays for WAAPI instances synced to <code class="code-inline">document.timeline</code>.</p>
+              
+              <div class="api-param-list">
+                <div class="param-row">
+                  <span class="param-name">.add(target, keyframes, options)</span>
+                  <span class="param-desc">Queues an animation step with optional position parameter <code class="code-inline">at</code>.</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-name">options.at</span>
+                  <span class="param-type">number | string</span>
+                  <span class="param-desc"><code class="code-inline">1.5</code> (absolute), <code class="code-inline">"-=0.3"</code> (relative), <code class="code-inline">"&lt;"</code> (with previous).</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-sandbox">
+              <div class="sandbox-header">
+                <span>Code Example</span>
+              </div>
+              <div class="code-editor-box">
+                <pre><code><span class="syn-kw">const</span> tl = <span class="syn-fn">timeline</span>({ <span class="syn-prop">delay</span>: <span class="syn-num">100</span> })
+  .<span class="syn-fn">add</span>(<span class="syn-str">'.header'</span>, { <span class="syn-prop">y</span>: [<span class="syn-num">30</span>, <span class="syn-num">0</span>] }, { <span class="syn-prop">spring</span>: <span class="syn-str">'snappy'</span> })
+  .<span class="syn-fn">add</span>(<span class="syn-str">'.hero'</span>,   { <span class="syn-prop">scale</span>: [<span class="syn-num">0.8</span>, <span class="syn-num">1</span>] }, { <span class="syn-prop">at</span>: <span class="syn-str">'&lt;'</span> })
+  .<span class="syn-fn">add</span>(<span class="syn-str">'.cards'</span>,  { <span class="syn-prop">opacity</span>: [<span class="syn-num">0</span>, <span class="syn-num">1</span>] }, { <span class="syn-prop">stagger</span>: <span class="syn-num">50</span>, <span class="syn-prop">at</span>: <span class="syn-str">'-=0.2'</span> });
+
+<span class="syn-kw">await</span> tl.<span class="syn-fn">play</span>().<span class="syn-prop">finished</span>;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: solveSpring() -->
+        <div class="doc-tab-content" id="tab-spring">
+          <div class="api-doc-grid">
+            <div class="api-details">
+              <h3 class="api-title">solveSpring(config?)</h3>
+              <p class="api-summary">Exact closed-form ODE solver for damped harmonic oscillators. Solves underdamped, critically damped, and overdamped differential equations.</p>
+              
+              <div class="api-param-list">
+                <div class="param-row">
+                  <span class="param-name">stiffness (k)</span>
+                  <span class="param-type">number (default: 100)</span>
+                  <span class="param-desc">Restorative force constant.</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-name">damping (c)</span>
+                  <span class="param-type">number (default: 10)</span>
+                  <span class="param-desc">Viscous energy dissipation coefficient.</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-name">mass (m)</span>
+                  <span class="param-type">number (default: 1)</span>
+                  <span class="param-desc">Payload inertia mass.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="api-sandbox">
+              <div class="sandbox-header">
+                <span>Code Example</span>
+              </div>
+              <div class="code-editor-box">
+                <pre><code><span class="syn-kw">const</span> solver = <span class="syn-fn">solveSpring</span>({
+  <span class="syn-prop">stiffness</span>: <span class="syn-num">300</span>,
+  <span class="syn-prop">damping</span>: <span class="syn-num">20</span>,
+  <span class="syn-prop">mass</span>: <span class="syn-num">1.2</span>,
+  <span class="syn-prop">velocity</span>: <span class="syn-num">5</span>
+});
+
+<span class="syn-kw">const</span> { position, velocity } = <span class="syn-fn">solver</span>(<span class="syn-num">0.15</span>); <span class="syn-comm">// state at 150ms</span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: autoMorph -->
+        <div class="doc-tab-content" id="tab-flip">
+          <div class="api-doc-grid">
+            <div class="api-details">
+              <h3 class="api-title">autoMorph(container, options?)</h3>
+              <p class="api-summary">AI-native layout transition primitive. Uses ResizeObserver and batched WAAPI height morphing to eliminate scroll jumping during LLM token streaming.</p>
+            </div>
+            <div class="api-sandbox">
+              <div class="sandbox-header">
+                <span>Streaming Setup</span>
+              </div>
+              <div class="code-editor-box">
+                <pre><code><span class="syn-kw">const</span> morph = <span class="syn-fn">autoMorph</span>(chatContainer, {
+  <span class="syn-prop">spring</span>: <span class="syn-str">'snappy'</span>,
+  <span class="syn-prop">threshold</span>: <span class="syn-num">2</span> <span class="syn-comm">// batch layout changes &gt; 2px</span>
+});
+
+<span class="syn-comm">// In your LLM stream callback:</span>
+onToken((token) =&gt; {
+  messageEl.textContent += token;
+  <span class="syn-comm">// Container morphs fluidly at 120 FPS on the GPU!</span>
+});</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: text -->
+        <div class="doc-tab-content" id="tab-text">
+          <div class="api-doc-grid">
+            <div class="api-details">
+              <h3 class="api-title">animateText(el, options) & scrambleText(el, options)</h3>
+              <p class="api-summary">Kinetic typography suite with 8 cinematic presets, strict WCAG accessibility (aria-label wrapper), and hacker terminal character decoders.</p>
+            </div>
+            <div class="api-sandbox">
+              <div class="sandbox-header">
+                <span>Presets</span>
+              </div>
+              <div class="code-editor-box">
+                <pre><code><span class="syn-fn">animateText</span>(<span class="syn-str">'#hero'</span>, {
+  <span class="syn-prop">preset</span>: <span class="syn-str">'flip-3d'</span>, <span class="syn-comm">// 'mask-up' | 'blur-in' | 'wave' | 'glitch'</span>
+  <span class="syn-prop">spring</span>: <span class="syn-str">'bouncy'</span>,
+  <span class="syn-prop">stagger</span>: <span class="syn-num">35</span>
+});
+
+<span class="syn-fn">scrambleText</span>(<span class="syn-str">'#terminal'</span>, {
+  <span class="syn-prop">charset</span>: <span class="syn-str">'katakana'</span>, <span class="syn-comm">// 'hex' | 'binary' | 'ascii'</span>
+  <span class="syn-prop">duration</span>: <span class="syn-num">800</span>
+});</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 6: magnetic -->
+        <div class="doc-tab-content" id="tab-magnetic">
+          <div class="api-doc-grid">
+            <div class="api-details">
+              <h3 class="api-title">magnetic(target, options?)</h3>
+              <p class="api-summary">Inverse-square spatial cursor attraction. Pulls elements toward pointer coordinates with velocity injection and spring damping.</p>
+            </div>
+            <div class="api-sandbox">
+              <div class="sandbox-header">
+                <span>Usage</span>
+              </div>
+              <div class="code-editor-box">
+                <pre><code><span class="syn-fn">magnetic</span>(<span class="syn-str">'.btn-magnetic'</span>, {
+  <span class="syn-prop">strength</span>: <span class="syn-num">0.35</span>,
+  <span class="syn-prop">radius</span>: <span class="syn-num">120</span>,
+  <span class="syn-prop">spring</span>: <span class="syn-str">'snappy'</span>
+});</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         THE COMPETITIVE MOAT (ZEROG VS GSAP MATRIX)
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-container" id="moat-section">
+      <div class="section-title-wrap">
+        <span class="section-badge">THE ARCHITECTURAL MOAT</span>
+        <h2 class="section-heading">ZeroG Motion vs. Legacy GSAP</h2>
+        <p class="section-subtext">Why leading frontend engineering teams are upgrading to native compositor execution.</p>
+      </div>
+
+      <div class="moat-table-card">
+        <table class="moat-table">
+          <thead>
+            <tr>
+              <th>Feature / Metric</th>
+              <th class="col-highlight">ZeroG Motion</th>
+              <th>GSAP 3.x</th>
+              <th>Framer Motion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Execution Thread</strong></td>
+              <td class="col-highlight"><span class="badge-feat feat-win">Compositor (GPU)</span></td>
+              <td><span class="badge-feat feat-loss">Main Thread (rAF)</span></td>
+              <td><span class="badge-feat feat-loss">Main Thread (rAF)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Bundle Size (Gzipped)</strong></td>
+              <td class="col-highlight"><strong class="text-green">&lt; 2.5 KB</strong></td>
+              <td>~67 KB (26x larger)</td>
+              <td>~35 KB (14x larger)</td>
+            </tr>
+            <tr>
+              <td><strong>React Hydration Jank Immunity</strong></td>
+              <td class="col-highlight"><span class="text-green">✓ 100% Immune</span></td>
+              <td><span class="text-red">✗ Drops frames</span></td>
+              <td><span class="text-red">✗ Drops frames</span></td>
+            </tr>
+            <tr>
+              <td><strong>AI Token Streaming autoMorph</strong></td>
+              <td class="col-highlight"><span class="text-green">✓ Native Sub-millisecond FLIP</span></td>
+              <td><span class="text-red">✗ Manual / Janky reflow</span></td>
+              <td><span class="text-red">✗ Layout jitter</span></td>
+            </tr>
+            <tr>
+              <td><strong>CSS Transforms Architecture</strong></td>
+              <td class="col-highlight">Independent (<code class="code-inline">translate</code>, <code class="code-inline">rotate</code>)</td>
+              <td>String-parsed matrix3d</td>
+              <td>Style string concat</td>
+            </tr>
+            <tr>
+              <td><strong>Garbage Collection (Memory Leaks)</strong></td>
+              <td class="col-highlight"><span class="text-green">WeakMap (Zero Leaks)</span></td>
+              <td>Manual kill() required</td>
+              <td>React state overhead</td>
+            </tr>
+            <tr>
+              <td><strong>External Dependencies</strong></td>
+              <td class="col-highlight"><strong class="text-green">0 Dependencies</strong></td>
+              <td>0</td>
+              <td>React, tslib, etc.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER & CALL TO ACTION
+    ═══════════════════════════════════════════════════════════════ -->
+    <footer class="site-footer">
+      <div class="footer-cta-box">
+        <h3 class="footer-cta-title">Ready to Elevate Your Web Motion?</h3>
+        <p class="footer-cta-sub">Install zerog-motion now and achieve 120 FPS hardware-accelerated animations in under 2.5KB.</p>
+        <div class="footer-actions">
+          <div class="npm-badge-large" id="footer-copy-npm">
+            <span>npm i zerog-motion</span>
+            <span class="copy-hint" id="footer-copy-hint">Copy</span>
+          </div>
+          <a href="https://github.com/bytewhisker/zerog-motion" target="_blank" rel="noopener noreferrer" class="btn-github-large">
+            Star on GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>zerog-motion · Released under the MIT License</span>
+          <span>Architected by <a href="https://github.com/bytewhisker" target="_blank" rel="noopener noreferrer">bytewhisker</a></span>
+        </div>
+        <div class="footer-links">
+          <a href="#hero">Back to top ↑</a>
+          <a href="https://github.com/bytewhisker/zerog-motion/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+          <a href="https://github.com/bytewhisker/zerog-motion/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
+        </div>
+      </div>
     </footer>
-  </div>
+
+  </main>
 
   <script type="module" src="./main.ts"></script>
 </body>

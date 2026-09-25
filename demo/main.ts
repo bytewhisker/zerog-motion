@@ -1,25 +1,23 @@
 /**
- * zerog-motion Interactive Demo
- * Full feature showcase: Text Motion Suite, Timeline, Magnetic, Spring, Scroll Reveal, autoMorph
+ * ══════════════════════════════════════════════════════════════════════════
+ * ZEROG-MOTION — GSAP-TIER INTERACTIVE SHOWCASE & DOCUMENTATION ENGINE
+ * ══════════════════════════════════════════════════════════════════════════
  */
 
 import {
   animate,
+  timeline,
+  solveSpring,
+  autoMorph,
   animateText,
   scrambleText,
-  timeline,
-  autoMorph,
-  scrollReveal,
-  magnetic,
   type TextPreset,
-  type ScrambleCharset,
 } from 'zerog-motion';
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
-
+// ─── Query Utilities ────────────────────────────────────────────────────────
 function qs<T extends HTMLElement = HTMLElement>(sel: string, root: ParentNode = document): T {
   const el = root.querySelector<T>(sel);
-  if (!el) throw new Error(`Element not found: ${sel}`);
+  if (!el) throw new Error(`Required element missing: ${sel}`);
   return el;
 }
 
@@ -27,425 +25,347 @@ function qsa<T extends HTMLElement = HTMLElement>(sel: string, root: ParentNode 
   return Array.from(root.querySelectorAll<T>(sel));
 }
 
-// ─── 1. Hero Timeline Entrance ────────────────────────────────────────────────
-function initHeroEntrance(): void {
-  timeline()
-    .add('#hero-title',  { y: [50, 0], opacity: [0, 1] }, { spring: 'snappy', delay: 100 })
-    .add('#hero-sub',    { y: [30, 0], opacity: [0, 1] }, { spring: 'smooth', at: '+=80' })
-    .add('#hero-badges', { y: [20, 0], opacity: [0, 1] }, { spring: 'bouncy', at: '+=60' })
-    .add('.cta-row',     { y: [15, 0], opacity: [0, 1] }, { spring: 'snappy', at: '+=60' })
-    .play();
-}
-
-// ─── 2. Text Motion Studio ────────────────────────────────────────────────────
-function initTextStudio(): void {
-  let currentPreset: TextPreset = 'mask-up';
-  let activeTextHandle: ReturnType<typeof animateText> | null = null;
-
-  const textEl = qs<HTMLParagraphElement>('#demo-text');
-  const textInput = qs<HTMLInputElement>('#custom-text-input');
-  const presetNameBadge = qs('#preset-name-badge');
-  const presetCodeSnippet = qs('#preset-code-snippet');
-
-  const codeSnippets: Record<TextPreset, string> = {
-    'mask-up':    "animateText(el, { preset: 'mask-up',    spring: 'snappy',  stagger: 40 })",
-    'blur-in':    "animateText(el, { preset: 'blur-in',    spring: 'gentle',  stagger: 25 })",
-    'flip-3d':    "animateText(el, { preset: 'flip-3d',    spring: 'bouncy',  stagger: 45 })",
-    'wave':       "animateText(el, { preset: 'wave',        spring: 'snappy',  stagger: 35 })",
-    'glitch':     "animateText(el, { preset: 'glitch',     spring: 'snappy',  stagger: 20 })",
-    'typewriter': "animateText(el, { preset: 'typewriter', spring: 'bouncy',  stagger: 60 })",
-    'rise':       "animateText(el, { preset: 'rise',       spring: 'smooth',  stagger: 80 })",
-    'fade-up':    "animateText(el, { preset: 'fade-up',    spring: 'smooth',  stagger: 50 })",
+// ─── 1. Navigation & Copy Badges ────────────────────────────────────────────
+function initNavAndCopy(): void {
+  const setupCopy = (badgeId: string, tipId?: string) => {
+    const badge = document.getElementById(badgeId);
+    if (!badge) return;
+    badge.addEventListener('click', async () => {
+      await navigator.clipboard.writeText('npm i zerog-motion');
+      if (tipId) {
+        const tip = document.getElementById(tipId);
+        if (tip) {
+          tip.textContent = 'Copied!';
+          tip.classList.add('show');
+          setTimeout(() => {
+            tip.textContent = 'Copy';
+            tip.classList.remove('show');
+          }, 2000);
+        }
+      }
+    });
   };
 
-  const springMap: Record<TextPreset, string> = {
-    'mask-up': 'snappy', 'blur-in': 'gentle', 'flip-3d': 'bouncy',
-    'wave': 'snappy', 'glitch': 'snappy', 'typewriter': 'bouncy',
-    'rise': 'smooth', 'fade-up': 'smooth',
-  };
-
-  const staggerMap: Record<TextPreset, number> = {
-    'mask-up': 40, 'blur-in': 25, 'flip-3d': 45,
-    'wave': 35, 'glitch': 20, 'typewriter': 60,
-    'rise': 80, 'fade-up': 50,
-  };
-
-  function playTextPreset(preset: TextPreset): void {
-    // Cancel previous
-    activeTextHandle?.revert();
-
-    // Restore original text
-    textEl.textContent = textInput.value || 'Motion so smooth it feels weightless';
-
-    setTimeout(() => {
-      activeTextHandle = animateText(textEl, {
-        preset,
-        spring: springMap[preset] as any,
-        stagger: staggerMap[preset],
-      });
-
-      presetNameBadge.textContent = preset;
-      presetCodeSnippet.textContent = codeSnippets[preset] ?? '';
-    }, 50);
-  }
-
-  // Tab buttons
-  qsa('.tab-btn', qs('#text-tabs')).forEach((btn) => {
-    btn.addEventListener('click', () => {
-      qsa('.tab-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentPreset = btn.dataset.preset as TextPreset;
-      playTextPreset(currentPreset);
-    });
-  });
-
-  // Replay button
-  qs('#btn-replay-text').addEventListener('click', () => playTextPreset(currentPreset));
-
-  // Custom text input
-  textInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') playTextPreset(currentPreset);
-  });
-
-  // Initial play after hero entrance
-  setTimeout(() => playTextPreset('mask-up'), 1200);
+  setupCopy('nav-copy-npm', 'nav-copy-tip');
+  setupCopy('footer-copy-npm', 'footer-copy-hint');
 }
 
-// ─── 3. ScrambleText ──────────────────────────────────────────────────────────
-function initScrambleText(): void {
-  const scrambleEl = qs<HTMLParagraphElement>('#scramble-text');
-  const scrambleInput = qs<HTMLInputElement>('#scramble-input');
-  let currentCharset: ScrambleCharset = 'default';
-  let activeScramble: ReturnType<typeof scrambleText> | null = null;
+// ─── 2. Hero Interactive GSAP-Style Timeline Scrubber ───────────────────────
+function initHeroScrubber(): void {
+  const scrubSlider = qs<HTMLInputElement>('#hero-scrub-slider');
+  const scrubFill = qs('#hero-scrub-fill');
+  const timecode = qs('#hero-timecode');
+  const btnPlay = qs('#btn-scrub-play');
+  const btnPause = qs('#btn-scrub-pause');
+  const btnReverse = qs('#btn-scrub-reverse');
+  const btnRestart = qs('#btn-scrub-restart');
+  const speedButtons = qsa('.btn-speed');
 
-  function runScramble(): void {
-    const text = scrambleInput.value || 'Initializing quantum entanglement protocol...';
-    scrambleEl.textContent = text;
-    activeScramble?.cancel();
+  const DURATION_MS = 2400;
+  let isDragging = false;
+  let playbackRate = 1.0;
 
-    scrambleEl.textContent = text;
-    activeScramble = scrambleText(scrambleEl, {
-      charset: currentCharset,
-      duration: 1800,
-      fps: currentCharset === 'binary' ? 30 : 20,
-      direction: 'ltr',
-    });
-  }
+  // Build the master timeline sequence
+  let heroTl = timeline()
+    .add('#act-orb', { scale: [0.3, 1], rotate: [-60, 0] }, { spring: 'bouncy' })
+    .add('#act-card', { x: [100, 0], opacity: [0, 1] }, { spring: 'snappy', at: '<' })
+    .add('#act-badge-1', { y: [30, 0], opacity: [0, 1] }, { spring: 'smooth', at: '-=0.2' })
+    .add('#act-badge-2', { y: [30, 0], opacity: [0, 1] }, { spring: 'smooth', at: '+=0.1' })
+    .add('#act-badge-3', { y: [30, 0], opacity: [0, 1] }, { spring: 'smooth', at: '+=0.1' });
 
-  qs('#btn-scramble').addEventListener('click', runScramble);
-  qs('#btn-scramble-skip').addEventListener('click', () => activeScramble?.finish());
+  // Play immediately on mount
+  heroTl.play();
 
-  qsa('.charset-btn', qs('#scramble-charsets')).forEach((btn) => {
-    btn.addEventListener('click', () => {
-      qsa('.charset-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCharset = btn.dataset.charset as ScrambleCharset;
-    });
-  });
+  // Monitor playhead for timecode and slider sync without touching CSS properties
+  function updatePlayheadUI(): void {
+    if (!isDragging) {
+      const current = heroTl.currentTime ?? 0;
+      const progress = Math.min(1, Math.max(0, current / DURATION_MS));
+      scrubSlider.value = String(Math.round(progress * 1000));
+      scrubFill.style.width = `${progress * 100}%`;
 
-  // Auto-run on view
-  setTimeout(runScramble, 2000);
-}
-
-// ─── 4. Spring Physics Playground ────────────────────────────────────────────
-function initSpringPlayground(): void {
-  const orb = qs<HTMLDivElement>('#spring-orb');
-  let stiffness = 400;
-  let damping = 30;
-  let mass = 1.0;
-  let isAnimating = false;
-
-  function getSpringConfig() {
-    return { stiffness, damping, mass };
-  }
-
-  function updateLiveCode(preset: string | null): void {
-    const codeEl = qs('#live-code');
-    if (preset) {
-      codeEl.innerHTML = `<code><span class="keyword">animate</span>(target, { <span class="prop">y</span>: [<span class="number">-50</span>, <span class="number">0</span>] }, {\n  <span class="prop">spring</span>: <span class="string">'${preset}'</span>\n});</code>`;
-    } else {
-      codeEl.innerHTML = `<code><span class="keyword">animate</span>(target, { <span class="prop">y</span>: [<span class="number">-50</span>, <span class="number">0</span>] }, {\n  <span class="prop">spring</span>: { <span class="prop">stiffness</span>: <span class="number">${stiffness}</span>, <span class="prop">damping</span>: <span class="number">${damping}</span>, <span class="prop">mass</span>: <span class="number">${mass}</span> }\n});</code>`;
+      const seconds = (current / 1000).toFixed(2);
+      timecode.textContent = `00:${seconds.padStart(5, '0')}s / 00:02.40s`;
     }
+    requestAnimationFrame(updatePlayheadUI);
   }
+  requestAnimationFrame(updatePlayheadUI);
 
-  // Sliders
-  const sliderStiffness = qs<HTMLInputElement>('#slider-stiffness');
-  const sliderDamping = qs<HTMLInputElement>('#slider-damping');
-  const sliderMass = qs<HTMLInputElement>('#slider-mass');
-
-  sliderStiffness.addEventListener('input', () => {
-    stiffness = parseInt(sliderStiffness.value);
-    qs('#val-stiffness').textContent = String(stiffness);
-    qsa('.btn-preset').forEach((b) => b.classList.remove('active'));
-    updateLiveCode(null);
+  // Slider scrub handler
+  scrubSlider.addEventListener('input', () => {
+    isDragging = true;
+    const progress = parseFloat(scrubSlider.value) / 1000;
+    const targetMs = progress * DURATION_MS;
+    heroTl.pause();
+    heroTl.currentTime = targetMs;
+    scrubFill.style.width = `${progress * 100}%`;
+    const seconds = (targetMs / 1000).toFixed(2);
+    timecode.textContent = `00:${seconds.padStart(5, '0')}s / 00:02.40s`;
   });
 
-  sliderDamping.addEventListener('input', () => {
-    damping = parseInt(sliderDamping.value);
-    qs('#val-damping').textContent = String(damping);
-    qsa('.btn-preset').forEach((b) => b.classList.remove('active'));
-    updateLiveCode(null);
+  scrubSlider.addEventListener('change', () => {
+    isDragging = false;
   });
 
-  sliderMass.addEventListener('input', () => {
-    mass = parseFloat(sliderMass.value);
-    qs('#val-mass').textContent = mass.toFixed(1);
-    qsa('.btn-preset').forEach((b) => b.classList.remove('active'));
-    updateLiveCode(null);
+  btnPlay.addEventListener('click', () => heroTl.play());
+  btnPause.addEventListener('click', () => heroTl.pause());
+  btnReverse.addEventListener('click', () => heroTl.reverse());
+  btnRestart.addEventListener('click', () => {
+    heroTl.currentTime = 0;
+    heroTl.play();
   });
 
-  // Preset buttons
-  const presetConfigs: Record<string, { stiffness: number; damping: number; mass: number }> = {
-    snappy:  { stiffness: 400, damping: 30, mass: 1 },
-    bouncy:  { stiffness: 200, damping: 10, mass: 1 },
-    smooth:  { stiffness: 120, damping: 20, mass: 1 },
-    gentle:  { stiffness: 80,  damping: 14, mass: 1 },
-  };
-
-  qsa('.btn-preset').forEach((btn) => {
+  speedButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const preset = btn.dataset.preset as string;
-      const cfg = presetConfigs[preset];
-      if (!cfg) return;
-
-      stiffness = cfg.stiffness;
-      damping = cfg.damping;
-      mass = cfg.mass;
-
-      sliderStiffness.value = String(stiffness);
-      sliderDamping.value = String(damping);
-      sliderMass.value = String(mass);
-      qs('#val-stiffness').textContent = String(stiffness);
-      qs('#val-damping').textContent = String(damping);
-      qs('#val-mass').textContent = mass.toFixed(1);
-
-      qsa('.btn-preset').forEach((b) => b.classList.remove('active'));
+      speedButtons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
-      updateLiveCode(preset);
-
-      if (!isAnimating) triggerSpring();
+      playbackRate = parseFloat(btn.dataset.speed || '1.0');
+      heroTl.playbackRate = playbackRate;
     });
   });
-
-  function triggerSpring(): void {
-    isAnimating = true;
-    animate(orb, { y: ['-60px', '0px'] }, {
-      spring: getSpringConfig(),
-      onFinish: () => { isAnimating = false; },
-    });
-  }
-
-  function pulseScale(): void {
-    isAnimating = true;
-    animate(orb, { scale: [1.4, 1] }, {
-      spring: getSpringConfig(),
-      onFinish: () => { isAnimating = false; },
-    });
-  }
-
-  function rotateOrb(): void {
-    isAnimating = true;
-    animate(orb, { rotate: [0, 360] }, {
-      duration: 700,
-      easing: 'ease-out',
-      onFinish: () => {
-        isAnimating = false;
-        animate(orb, { rotate: [360, 0] }, { duration: 1, easing: 'linear' });
-      },
-    });
-  }
-
-  orb.addEventListener('click', triggerSpring);
-  qs('#btn-trigger-spring').addEventListener('click', triggerSpring);
-  qs('#btn-scale-spring').addEventListener('click', pulseScale);
-  qs('#btn-rotate-spring').addEventListener('click', rotateOrb);
-
-  updateLiveCode('snappy');
 }
 
-// ─── 5. Timeline Demo ─────────────────────────────────────────────────────────
-function initTimelineDemo(): void {
-  const items = [
-    qs('#tl-item-1'),
-    qs('#tl-item-2'),
-    qs('#tl-item-3'),
-    qs('#tl-item-4'),
+// ─── 3. Demo 1: The Liquid AI Terminal (Streaming autoMorph) ────────────────
+function initLiquidAITerminal(): void {
+  const btnRun = qs('#btn-run-stream-battle');
+  const btnReset = qs('#btn-reset-stream-battle');
+  const textLegacy = qs('#text-legacy');
+  const textZeroG = qs('#text-zerog');
+  const termLegacy = qs('#terminal-legacy');
+  const termZeroG = qs('#terminal-zerog');
+  const fpsLegacy = qs('#fps-legacy');
+  const jitterCount = qs('#jitter-count');
+
+  const tokens = [
+    'Initializing quantum intelligence matrix...',
+    ' Streaming 120 FPS compositor tokens.',
+    ' Compiling analytical ODE spring keyframes.',
+    ' WeakMap garbage-collection active: 0 memory leaks.',
+    ' Main-thread freed: GSAP rAF jank eliminated.',
+    ' Liquid FLIP height reflow smoothly stabilized.'
   ];
 
-  // Set initial state
-  items.forEach((item) => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateX(-20px)';
-  });
-
-  function playTimeline(): void {
-    // Reset
-    items.forEach((item) => {
-      item.style.opacity = '0';
-      item.style.transform = 'translateX(-20px)';
-    });
-
-    setTimeout(() => {
-      timeline()
-        .add('#tl-item-1', { x: [-20, 0], opacity: [0, 1] }, { spring: 'snappy' })
-        .add('#tl-item-2', { x: [-20, 0], opacity: [0, 1] }, { spring: 'smooth', at: '+=80' })
-        .add('#tl-item-3', { x: [-20, 0], opacity: [0, 1] }, { spring: 'bouncy', at: '+=80' })
-        .add('#tl-item-4', { x: [-20, 0], opacity: [0, 1] }, { spring: 'snappy', at: '+=80' })
-        .play();
-    }, 50);
-  }
-
-  qs('#btn-timeline-play').addEventListener('click', playTimeline);
-  playTimeline();
-}
-
-// ─── 6. Magnetic Buttons ─────────────────────────────────────────────────────
-function initMagnetic(): void {
-  const magneticEls: Array<{ id: string; strength: number; spring: string }> = [
-    { id: '#mag-1', strength: 0.4, spring: 'snappy' },
-    { id: '#mag-2', strength: 0.35, spring: 'bouncy' },
-    { id: '#mag-3', strength: 0.3, spring: 'smooth' },
-    { id: '#mag-4', strength: 0.45, spring: 'gentle' },
-    { id: '#mag-5', strength: 0.5, spring: 'snappy' },
-    { id: '#mag-6', strength: 0.5, spring: 'bouncy' },
-  ];
-
-  for (const cfg of magneticEls) {
-    try {
-      const el = qs<HTMLButtonElement>(cfg.id);
-      magnetic(el, {
-        strength: cfg.strength,
-        spring: cfg.spring as any,
-        scaleOnHover: true,
-        scale: 1.08,
-      });
-    } catch {
-      // Element may not exist in some views
-    }
-  }
-}
-
-// ─── 7. AI Streaming Demo ─────────────────────────────────────────────────────
-function initStreamingDemo(): void {
-  const morphBox = qs<HTMLDivElement>('#box-morph');
-  const rawBox = qs<HTMLDivElement>('#box-raw');
-  const morphText = qs<HTMLSpanElement>('#text-morph');
-  const rawText = qs<HTMLSpanElement>('#text-raw');
-  const morphCursor = qs('#cursor-morph');
-  const rawCursor = qs('#cursor-raw');
-  const counterMorph = qs('#counter-morph');
-  const counterRaw = qs('#counter-raw');
-
-  const cleanupMorph = autoMorph(morphBox, { spring: 'smooth' });
-
-  const AI_RESPONSES = [
-    `zerog-motion uses the Web Animations API (WAAPI) to offload animation execution directly to the browser's compositor thread — the same GPU thread that handles page painting. This means your animations run completely independently of JavaScript execution. When your AI model streams 200 tokens per second, resizes DOM elements, or runs WebWorkers, the animations keep running at silky 60fps without a single dropped frame. That's the zero-gravity difference.`,
-    `The analytical spring ODE solver in zerog-motion computes the exact position of a spring at any time t without stepping through simulation. This means: no update loops, no polling, no rAF accumulation. It simply generates a burst of keyframes from the closed-form spring equation, hands them to WAAPI, and walks away. The browser's GPU does the rest. Traditional libraries like GSAP run their animation engine on every requestAnimationFrame callback — if your JS is busy, they stall.`,
-    `Building for the AI era means your UI needs to handle constant, unpredictable DOM mutations. LLM streaming causes height changes 50-100x per second. Without autoMorph, each height change triggers a synchronous layout reflow. With autoMorph, a ResizeObserver batches those changes and drives smooth height transitions through WAAPI — entirely off the main thread.`,
-  ];
-
-  let streamTimer: ReturnType<typeof setTimeout> | null = null;
+  let streamTimer: number | null = null;
+  let tokenIndex = 0;
   let isStreaming = false;
-  let responseIndex = 0;
 
-  qs('#btn-stream').addEventListener('click', () => {
+  // Initialize autoMorph on the ZeroG terminal container
+  const morphHandle = autoMorph(termZeroG, {
+    spring: 'snappy',
+    threshold: 1,
+  });
+
+  function startStreamBattle(): void {
     if (isStreaming) return;
     isStreaming = true;
+    tokenIndex = 0;
+    textLegacy.textContent = '';
+    textZeroG.textContent = '';
 
-    const response = AI_RESPONSES[responseIndex % AI_RESPONSES.length]!;
-    responseIndex++;
+    // Animate FPS degradation on legacy side
+    fpsLegacy.textContent = '28 FPS';
+    jitterCount.textContent = 'Severe Reflow (14 drops)';
 
-    morphText.textContent = '';
-    rawText.textContent = '';
-    morphCursor.style.display = 'inline';
-    rawCursor.style.display = 'inline';
-    counterMorph.textContent = '0 tokens';
-    counterRaw.textContent = '0 tokens';
-
-    const words = response.split(' ');
-    let wordIndex = 0;
-
-    function streamNext(): void {
-      if (wordIndex >= words.length) {
-        morphCursor.style.display = 'none';
-        rawCursor.style.display = 'none';
+    streamTimer = window.setInterval(() => {
+      if (tokenIndex >= tokens.length) {
+        if (streamTimer) clearInterval(streamTimer);
         isStreaming = false;
         return;
       }
 
-      const chunk = (words[wordIndex] ?? '') + (wordIndex < words.length - 1 ? ' ' : '');
-      wordIndex++;
+      const nextChunk = tokens[tokenIndex] + '\n\n';
+      
+      // Standard DOM (Legacy): violent height jumps
+      textLegacy.textContent += nextChunk;
+      termLegacy.scrollTop = termLegacy.scrollHeight;
 
-      morphText.textContent += chunk;
-      rawText.textContent += chunk;
+      // ZeroG: autoMorph handles the height growth seamlessly via WAAPI
+      textZeroG.textContent += nextChunk;
+      termZeroG.scrollTop = termZeroG.scrollHeight;
 
-      counterMorph.textContent = `${wordIndex} tokens`;
-      counterRaw.textContent = `${wordIndex} tokens`;
+      tokenIndex++;
+    }, 450);
+  }
 
-      const delay = 40 + Math.random() * 60;
-      streamTimer = setTimeout(streamNext, delay);
-    }
+  function resetStreamBattle(): void {
+    if (streamTimer) clearInterval(streamTimer);
+    isStreaming = false;
+    textLegacy.textContent = 'Press "Stream LLM Tokens" to start...';
+    textZeroG.textContent = 'Press "Stream LLM Tokens" to start...';
+    fpsLegacy.textContent = '34 FPS';
+    jitterCount.textContent = 'Severe Reflow';
+  }
 
-    streamNext();
-  });
-
-  return () => {
-    if (streamTimer) clearTimeout(streamTimer);
-    cleanupMorph();
-  };
+  btnRun.addEventListener('click', startStreamBattle);
+  btnReset.addEventListener('click', resetStreamBattle);
 }
 
-// ─── 8. Scroll Reveal ────────────────────────────────────────────────────────
-function initScrollReveal(): void {
-  const cards = qsa('.scroll-reveal-card');
+// ─── 4. Demo 2: True Mass Spatial Dock (macOS Gravitational Physics) ─────────
+function initSpatialDock(): void {
+  const dock = qs('#spatial-dock-bar');
+  const items = qsa<HTMLElement>('.dock-item', dock);
 
-  cards.forEach((card) => {
-    const preset = (card.dataset.reveal ?? 'fade-up') as any;
-    scrollReveal(card, {
-      preset,
-      spring: 'snappy',
-      threshold: 0.1,
+  const springSolver = solveSpring({
+    stiffness: 350,
+    damping: 24,
+    mass: 1.2,
+  });
+
+  dock.addEventListener('mousemove', (e: MouseEvent) => {
+    const mouseX = e.clientX;
+
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenterX = rect.left + rect.width / 2;
+      const dist = Math.abs(mouseX - itemCenterX);
+      const maxDist = 180;
+
+      if (dist < maxDist) {
+        // Physical mass displacement
+        const intensity = 1 - (dist / maxDist);
+        const { position } = springSolver(intensity * 0.4);
+        const scaleVal = 1 + (position - 1) * 0.65;
+        const liftVal = -(intensity * 26);
+        const skewVal = ((mouseX - itemCenterX) / maxDist) * -12;
+
+        item.style.transform = `translateY(${liftVal}px) scale(${scaleVal}) skewX(${skewVal}deg)`;
+      } else {
+        item.style.transform = 'translateY(0px) scale(1) skewX(0deg)';
+      }
+    });
+  });
+
+  dock.addEventListener('mouseleave', () => {
+    items.forEach((item) => {
+      animate(item, {
+        y: [parseFloat(item.style.transform.match(/translateY\(([^)]+)px\)/)?.[1] || '0'), 0],
+        scale: [1.3, 1],
+        skewX: [0, 0]
+      }, {
+        spring: 'bouncy'
+      });
+      item.style.transform = '';
     });
   });
 }
 
-// ─── 9. Install Copy ─────────────────────────────────────────────────────────
-function initCopyInstall(): void {
-  const copyBox = qs('#copy-install');
-  const hint = qs('#copy-hint');
+// ─── 5. Demo 3: Variable Font Matrix & Main-Thread Freeze ───────────────────
+function initFontMatrix(): void {
+  const cards = qsa<HTMLElement>('.matrix-card');
+  const btnFreeze = qs('#btn-freeze-main');
+  const spinner = qs('#js-spinner');
+  const threadLabel = qs('#thread-status-label');
 
-  copyBox.addEventListener('click', () => {
-    navigator.clipboard?.writeText('npm i zerog-motion').catch(() => {});
-    hint.textContent = '✓ Copied!';
-    animate(copyBox, { scale: [0.97, 1] }, { spring: 'bouncy' });
-    setTimeout(() => { hint.textContent = 'Copy'; }, 2000);
+  // Trigger continuous GPU-accelerated variable font and 3D wave animation
+  cards.forEach((card, index) => {
+    const word = card.querySelector<HTMLElement>('.matrix-word');
+    if (!word) return;
+
+    animate(word, {
+      scale: [0.95, 1.05],
+      letterSpacing: ['0.02em', '0.12em'],
+      rotateX: [-10, 10],
+      rotateY: [-8, 8]
+    }, {
+      duration: 2000 + index * 200,
+      direction: 'alternate',
+      iterations: Infinity,
+      easing: 'ease-in-out'
+    });
+  });
+
+  // Intentional Main-Thread Blocking Loop (1500ms)
+  btnFreeze.addEventListener('click', () => {
+    threadLabel.textContent = 'MAIN THREAD FROZEN (JS rAF Dead)';
+    threadLabel.style.color = '#ef4444';
+    spinner.style.borderColor = '#ef4444';
+
+    setTimeout(() => {
+      const blockStart = performance.now();
+      // Block the main thread synchronously
+      while (performance.now() - blockStart < 1500) {
+        // Intensive math loop locking the JS engine
+        Math.sqrt(Math.random() * 1000000);
+      }
+
+      threadLabel.textContent = 'Main Thread Active';
+      threadLabel.style.color = '';
+      spinner.style.borderColor = 'var(--neon-green)';
+    }, 50);
   });
 }
 
-// ─── 10. Section Header Animations ───────────────────────────────────────────
-function initSectionHeaders(): void {
-  scrollReveal('.section-title', {
-    preset: 'fade-up',
-    spring: 'snappy',
-    threshold: 0.2,
-  });
-  scrollReveal('.section-desc', {
-    preset: 'fade-up',
-    spring: 'smooth',
-    threshold: 0.2,
+// ─── 6. Multi-Track Timeline Sequencer Studio ───────────────────────────────
+function initTimelineStudio(): void {
+  const btnPlay = qs('#btn-tl-play');
+  const btnPause = qs('#btn-tl-pause');
+  const btnRestart = qs('#btn-tl-restart');
+  const playhead = qs('#timeline-playhead');
+  const readout = qs('#tl-playhead-readout');
+
+  let studioTl = timeline()
+    .add('#tle-title', { y: [40, 0], opacity: [0, 1] }, { spring: 'snappy' })
+    .add('#tle-orb',   { scale: [0.4, 1.15], rotate: [-90, 0] }, { spring: 'bouncy', at: '<' })
+    .add('.tl-sub-badge', { y: [20, 0], opacity: [0, 1] }, { spring: 'smooth', stagger: 50, at: '-=0.2' })
+    .add('#tle-cta',   { y: [15, 0], opacity: [0, 1] }, { spring: 'snappy', at: '+=0.2' });
+
+  function syncNeedle(): void {
+    const cur = studioTl.currentTime ?? 0;
+    const progress = Math.min(1, cur / 2800);
+    const needleLeft = 190 + progress * 580;
+    playhead.style.transform = `translateX(${progress * 100}%)`;
+    readout.textContent = `${(cur / 1000).toFixed(2)}s`;
+    requestAnimationFrame(syncNeedle);
+  }
+  requestAnimationFrame(syncNeedle);
+
+  btnPlay.addEventListener('click', () => studioTl.play());
+  btnPause.addEventListener('click', () => studioTl.pause());
+  btnRestart.addEventListener('click', () => {
+    studioTl.currentTime = 0;
+    studioTl.play();
   });
 }
 
-// ─── Bootstrap ───────────────────────────────────────────────────────────────
+// ─── 7. Interactive Docs & Sandbox ──────────────────────────────────────────
+function initDocsTabs(): void {
+  const tabBtns = qsa('.doc-tab-btn');
+  const tabContents = qsa('.doc-tab-content');
+  const btnRunSandbox = qs('#btn-run-animate-sandbox');
+  const sandboxTarget = qs('#sandbox-animate-target');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach((b) => b.classList.remove('active'));
+      tabContents.forEach((c) => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      const tabId = `tab-${btn.dataset.tab}`;
+      const targetContent = document.getElementById(tabId);
+      if (targetContent) targetContent.classList.add('active');
+    });
+  });
+
+  // Sandbox Live Run
+  btnRunSandbox.addEventListener('click', () => {
+    animate(sandboxTarget, {
+      x: [0, 180, 0],
+      rotate: [0, 180, 360],
+      scale: [0.8, 1.25, 1],
+      borderRadius: ['10px', '50%', '10px']
+    }, {
+      spring: 'bouncy'
+    });
+  });
+}
+
+// ─── Master Initialization ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initHeroEntrance();
-  initTextStudio();
-  initScrambleText();
-  initSpringPlayground();
-  initTimelineDemo();
-  initMagnetic();
-  initStreamingDemo();
-  initScrollReveal();
-  initCopyInstall();
-  initSectionHeaders();
+  initNavAndCopy();
+  initHeroScrubber();
+  initLiquidAITerminal();
+  initSpatialDock();
+  initFontMatrix();
+  initTimelineStudio();
+  initDocsTabs();
 });

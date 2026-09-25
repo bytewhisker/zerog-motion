@@ -3,6 +3,7 @@ import {
   solveSpring,
   deriveSpringDuration,
   sampleSpringProgress,
+  compileSpringKeyframes,
   DEFAULT_SPRING_CONFIG,
 } from '../src/core/spring.js';
 import { presets } from '../src/presets/index.js';
@@ -117,5 +118,67 @@ describe('Spring Progress Sampling (sampleSpringProgress)', () => {
     const samples = sampleSpringProgress(presets.bouncy, 600, 60);
     const hasOvershoot = samples.some((val) => val > 1.0);
     expect(hasOvershoot).toBe(true);
+  });
+});
+
+describe('WAAPI Spring Keyframe Compiler (compileSpringKeyframes)', () => {
+  it('compiles independent transform properties without string-parsing matrices', () => {
+    const compiled = compileSpringKeyframes(
+      {
+        x: { from: 0, to: 200, unit: 'px' },
+        rotate: { from: 0, to: 90, unit: 'deg' },
+        scale: { from: 0.8, to: 1.2, unit: '' },
+      },
+      { stiffness: 200, damping: 15, mass: 1 },
+      60
+    );
+
+    expect(compiled.keyframes.length).toBeGreaterThan(10);
+    expect(compiled.duration).toBeGreaterThan(100);
+    expect(compiled.stepInterval).toBeCloseTo(1000 / 60, 2);
+
+    const firstFrame = compiled.keyframes[0];
+    const lastFrame = compiled.keyframes[compiled.keyframes.length - 1];
+
+    expect(firstFrame.offset).toBe(0);
+    expect(firstFrame.translate).toBe('0px 0px');
+    expect(firstFrame.rotate).toBe('0deg');
+    expect(firstFrame.scale).toBe('0.8');
+
+    expect(lastFrame.offset).toBe(1);
+    expect(lastFrame.translate).toBe('200px 0px');
+    expect(lastFrame.rotate).toBe('90deg');
+    expect(lastFrame.scale).toBe('1.2');
+  });
+
+  it('compiles CSS custom properties (variables) for zero main-thread jank', () => {
+    const compiled = compileSpringKeyframes(
+      {
+        '--wave-progress': { from: 0, to: 1, unit: '' },
+        '--blur-radius': { from: 10, to: 0, unit: 'px' },
+      },
+      presets.snappy,
+      60
+    );
+
+    const firstFrame = compiled.keyframes[0];
+    const lastFrame = compiled.keyframes[compiled.keyframes.length - 1];
+
+    expect(firstFrame['--wave-progress']).toBe(0);
+    expect(firstFrame['--blur-radius']).toBe('10px');
+    expect(lastFrame['--wave-progress']).toBe(1);
+    expect(lastFrame['--blur-radius']).toBe('0px');
+  });
+
+  it('underdamped equation calculates velocity and amplitude within precision bounds at settle', () => {
+    const config = { stiffness: 150, damping: 12, mass: 1, precision: 0.001 };
+    const solver = solveSpring(config);
+    const duration = deriveSpringDuration(config);
+
+    const settleSeconds = duration / 1000;
+    const finalState = solver(settleSeconds);
+
+    expect(Math.abs(finalState.position - 1)).toBeLessThan(0.005);
+    expect(Math.abs(finalState.velocity)).toBeLessThan(0.02);
   });
 });
